@@ -1,2 +1,15 @@
 # NicoShopR34
-NicoShopR34 permite a los administradores gestionar productos y a los clientes explorar el catálogo, añadir productos al carrito, realizar compras con la generación de facturas y consultar su historial de compras. La solución está construida con una arquitectura cliente-servidor y cuenta con autenticación segura mediante JWT.
+
+NicoShopR34 es una tienda en línea diseñada para ofrecer una experiencia de compra ágil y eficiente, desarrollada como proyecto final para el curso de Computación en Internet I. Este repositorio contiene el código fuente completo y la documentación necesaria para configurar y ejecutar la aplicación en un entorno de desarrollo local.
+
+## Tecnologías utilizadas
+- **Frontend**: HTML, CSS, JavaScript.
+- **Backend**: Node.js, Express para los servicios REST.
+- **Persistencia de datos**: Archivos JSON (o base de datos opcional).
+- **Autenticación**: JSON Web Tokens (JWT).
+
+## Funcionalidades principales
+- **Administrador**: Iniciar sesión, agregar productos al inventario.
+- **Cliente**: Registrarse/iniciar sesión, explorar productos, gestionar carrito, realizar compras y visualizar historial de compras.
+
+## Instrucciones de configuración
