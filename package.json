@@ -1,0 +1,21 @@
+{
+  "name": "nicoshopr34",
+  "version": "1.0.0",
+  "description": "NicoShopR34 es una tienda en línea diseñada para ofrecer una experiencia de compra ágil y eficiente, desarrollada como proyecto final para el curso de Computación en Internet I. Este repositorio contiene el código fuente completo y la documentación necesaria para configurar y ejecutar la aplicación en un entorno de desarrollo local.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
