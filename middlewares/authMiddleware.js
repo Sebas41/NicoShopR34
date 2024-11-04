@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-// Clave secreta para JWT (en producción, usa variables de entorno)
-const SECRET_KEY = 'claveSuperSecreta';
+// Clave secreta para JWT (almacenada en variables de entorno)
+const SECRET_KEY = process.env.SECRET_KEY || 'claveSuperSecreta';
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = authHeader && authHeader.split(' ')[1]; // Formato: "Bearer TOKEN"
 
   if (!token) return res.status(401).json({ message: 'Token no proporcionado' });
 
