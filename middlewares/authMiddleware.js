@@ -1,20 +1,19 @@
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = process.env.JWT_SECRET || 'claveSuperSecreta';
 
-function authMiddleware(req, res, next) {
-  const token = req.headers['authorization'];
-  
-  if (!token) {
-    return res.status(401).json({ message: 'Acceso denegado, falta el token' });
-  }
+// Clave secreta para JWT (en producción, usa variables de entorno)
+const SECRET_KEY = 'claveSuperSecreta';
 
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded; // Agrega la información del usuario decodificado a la solicitud
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) return res.status(401).json({ message: 'Token no proporcionado' });
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) return res.status(403).json({ message: 'Token inválido' });
+    req.user = user;
     next();
-  } catch (err) {
-    return res.status(401).json({ message: 'Token inválido o expirado' });
-  }
+  });
 }
 
-module.exports = authMiddleware;
+module.exports = authenticateToken;
