@@ -26,8 +26,9 @@ router.post('/agregar', (req, res) => {
 
 // Ruta para ver el carrito
 router.get('/:userId', (req, res) => {
+  console.log('Carritos actuales:', carritos);
   const { userId } = req.params;
-  const carrito = carritos.find(c => c.userId === userId);
+  const carrito = carritos.find(c => c.userId == userId);
 
   if (!carrito) {
     return res.status(404).json({ message: 'Carrito no encontrado' });
