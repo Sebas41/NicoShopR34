@@ -1,17 +1,32 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { readData, writeData } = require('../utils/fileHandler');
+const Joi = require('joi');
 
-const SECRET_KEY = 'claveSuperSecreta'; // En producción, usa variables de entorno
+// Clave secreta para JWT (en producción, usa variables de entorno)
+const SECRET_KEY = process.env.SECRET_KEY || 'claveSuperSecreta';
+
+// Esquema de validación para registro
+const registerSchema = Joi.object({
+  username: Joi.string().min(3).max(30).required(),
+  password: Joi.string().min(6).required(),
+  role: Joi.string().valid('admin', 'cliente').required()
+});
+
+// Esquema de validación para inicio de sesión
+const loginSchema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required()
+});
 
 // Función para registrar un nuevo usuario
 function registerUser(req, res) {
-  const { username, password, role } = req.body;
-
-  if (!username || !password || !role) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  const { error } = registerSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
   }
 
+  const { username, password, role } = req.body;
   const usuarios = readData('usuarios.json');
 
   const existingUser = usuarios.find(u => u.username === username);
@@ -29,12 +44,12 @@ function registerUser(req, res) {
 
 // Función para iniciar sesión
 function loginUser(req, res) {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  const { error } = loginSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
   }
 
+  const { username, password } = req.body;
   const usuarios = readData('usuarios.json');
   const user = usuarios.find(u => u.username === username);
 

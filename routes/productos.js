@@ -1,23 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/authMiddleware');
+const { agregarProducto, obtenerProductos } = require('../controllers/productosController');
+const authenticateToken = require('../middlewares/authMiddleware');
+const authorizeRoles = require('../middlewares/roleMiddleware');
 
 // Ruta para agregar un nuevo producto (solo para administradores)
-router.post('/agregar', authMiddleware, (req, res) => {
-  const { nombre, descripcion, precio, cantidad } = req.body;
-  
-  // Solo admins pueden agregar productos
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Permiso denegado' });
-  }
+router.post('/agregar', authenticateToken, authorizeRoles('admin'), agregarProducto);
 
-  if (!nombre || !descripcion || !precio || !cantidad) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
-  }
-
-  const nuevoProducto = { id: productos.length + 1, nombre, descripcion, precio, cantidad };
-  productos.push(nuevoProducto);
-  res.status(201).json({ message: 'Producto agregado con éxito', producto: nuevoProducto });
-});
+// Ruta para obtener la lista de productos
+router.get('/', obtenerProductos);
 
 module.exports = router;

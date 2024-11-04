@@ -7,7 +7,7 @@ function readData(file) {
   if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, JSON.stringify([]));
   }
-  const data = fs.readFileSync(filePath);
+  const data = fs.readFileSync(filePath, 'utf-8');
   return JSON.parse(data);
 }
 
