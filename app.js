@@ -1,8 +1,8 @@
-// app.js
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const authRoutes = require('./routes/auth');
 const productosRoutes = require('./routes/productos');
 const carritoRoutes = require('./routes/carrito');
@@ -13,13 +13,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/auth', authRoutes);
 app.use('/productos', productosRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/orders', ordersRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Bienvenido a NicoShopR34');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.use((req, res) => {
