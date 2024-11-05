@@ -4,30 +4,25 @@ const path = require('path');
 
 function generarFactura(orden, usuario, productos) {
   const doc = new PDFDocument();
-  const facturaPath = path.join(__dirname, '..', 'facturas', `factura_${orden.id}.pdf`);
+  const facturaPath = path.join(__dirname, '..', 'facturas', `factura${orden.id}.pdf`);
 
-  // Asegurar que la carpeta de facturas exista
   if (!fs.existsSync(path.join(__dirname, '..', 'facturas'))) {
     fs.mkdirSync(path.join(__dirname, '..', 'facturas'));
   }
 
   doc.pipe(fs.createWriteStream(facturaPath));
 
-  // Encabezado
   doc.fontSize(20).text('Factura de Compra', { align: 'center' });
   doc.moveDown();
 
-  // Información del usuario
   doc.fontSize(12).text(`ID de Orden: ${orden.id}`);
   doc.text(`Fecha: ${orden.fecha}`);
   doc.text(`Cliente: ${usuario.username}`);
   doc.moveDown();
 
-  // Tabla de productos
   doc.text('Productos:', { underline: true });
   orden.productos.forEach(item => {
-    const producto = productos.find(p => p.id === item.productoId);
-    doc.text(`${producto.nombre} - Cantidad: ${item.cantidad} - Precio Unitario: $${producto.precio}`);
+    doc.text(`${item.nombre} - Cantidad: ${item.cantidad} - Precio Unitario: $${item.precio}`);
   });
   doc.moveDown();
 

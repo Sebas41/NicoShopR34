@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { agregarProducto, obtenerProductos } = require('../controllers/productosController');
+const ProductController = require('../controllers/ControllerProduct');
 const authenticateToken = require('../middlewares/authMiddleware');
 const authorizeRoles = require('../middlewares/roleMiddleware');
 
-// Ruta para agregar un nuevo producto (solo para administradores)
-router.post('/agregar', authenticateToken, authorizeRoles('admin'), agregarProducto);
+router.post('/agregar', authenticateToken, authorizeRoles('admin'), (req, res) => ProductController.addProduct(req, res));
 
-// Ruta para obtener la lista de productos
-router.get('/', obtenerProductos);
+router.get('/', (req, res) => ProductController.getProducts(req, res));
 
 module.exports = router;

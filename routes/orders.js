@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { obtenerOrdenes } = require('../controllers/ordersController');
+const PurchaseController = require('../controllers/ControllerPurchase');
 const authenticateToken = require('../middlewares/authMiddleware');
 
-// Ruta para obtener el historial de compras
-router.get('/', authenticateToken, obtenerOrdenes);
+router.get('/', authenticateToken, (req, res) => PurchaseController.getOrders(req, res));
 
 module.exports = router;

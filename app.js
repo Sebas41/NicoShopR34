@@ -1,3 +1,4 @@
+// app.js
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -9,11 +10,9 @@ const ordersRoutes = require('./routes/orders');
 
 const app = express();
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Rutas
 app.use('/auth', authRoutes);
 app.use('/productos', productosRoutes);
 app.use('/carrito', carritoRoutes);
@@ -36,5 +35,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-
-

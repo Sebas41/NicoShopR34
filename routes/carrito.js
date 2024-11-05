@@ -1,15 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { agregarAlCarrito, verCarrito, comprar } = require('../controllers/carritoController');
+const PurchaseController = require('../controllers/ControllerPurchase');
 const authenticateToken = require('../middlewares/authMiddleware');
 
-// Ruta para agregar un producto al carrito
-router.post('/agregar', authenticateToken, agregarAlCarrito);
+router.post('/agregar', authenticateToken, (req, res) => PurchaseController.addToCart(req, res));
 
-// Ruta para ver el carrito
-router.get('/', authenticateToken, verCarrito);
-
-// Ruta para realizar la compra
-router.post('/comprar', authenticateToken, comprar);
+router.post('/comprar', authenticateToken, (req, res) => PurchaseController.checkout(req, res));
 
 module.exports = router;
