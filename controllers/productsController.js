@@ -1,4 +1,4 @@
-const DataBase = require('./ControllerDataBase');
+const DataBase = require('./dataBaseController');
 const Joi = require('joi');
 
 const productSchema = Joi.object({

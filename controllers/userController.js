@@ -1,4 +1,4 @@
-const DataBase = require('./ControllerDataBase');
+const DataBase = require('./dataBaseController');
 const bcrypt = require('bcryptjs');
 
 class UserController {
@@ -12,7 +12,7 @@ class UserController {
 
   addUser(user) {
     const users = this.userDb.readData();
-    user.password = bcrypt.hashSync(user.password, 10); // Encriptamos la contraseña
+    user.password = bcrypt.hashSync(user.password, 10); 
     users.push(user);
     this.userDb.writeData(users);
   }

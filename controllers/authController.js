@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const UserController = require('./ControllerUser');
+const UserController = require('./userController');
 const Joi = require('joi');
 
 const SECRET_KEY = process.env.SECRET_KEY || 'claveSuperSecreta';
@@ -29,7 +29,8 @@ class AuthController {
       return res.status(409).json({ message: 'El usuario ya existe' });
     }
 
-    UserController.addUser({ id: Date.now(), username, password, role });
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    UserController.addUser({ id: Date.now(), username, password: hashedPassword, role });
     res.status(201).json({ message: 'Usuario registrado con éxito' });
   }
 

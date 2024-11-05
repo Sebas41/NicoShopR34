@@ -1,5 +1,4 @@
-// controllers/ControllerPurchase.js
-const DataBase = require('./ControllerDataBase');
+const DataBase = require('./dataBaseController');
 const { generarFactura } = require('../utils/generateInvoice');
 
 class PurchaseController {
