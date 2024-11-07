@@ -17,36 +17,6 @@ window.addEventListener('DOMContentLoaded', cargarProductos);
 
 // main.js
 
-function initializeNavbar() {
-    const token = localStorage.getItem('token');
-    if (token) {
-        const decoded = parseJwt(token);
-        document.getElementById('loginNav').classList.add('d-none');
-        document.getElementById('registerNav').classList.add('d-none');
-        document.getElementById('logoutNav').classList.remove('d-none');
-        document.getElementById('cartNav').classList.remove('d-none');
-        if (decoded.role === 'admin') {
-            document.getElementById('adminNav').classList.remove('d-none');
-        }
-    } else {
-        document.getElementById('loginNav').classList.remove('d-none');
-        document.getElementById('registerNav').classList.remove('d-none');
-        document.getElementById('logoutNav').classList.add('d-none');
-        document.getElementById('cartNav').classList.add('d-none');
-        document.getElementById('adminNav').classList.add('d-none');
-    }
-
-    // Manejar el cierre de sesión
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('token');
-            alert('Sesión cerrada exitosamente.');
-            window.location.href = 'index.html';
-        });
-    }
-}
-
 // Función para decodificar JWT
 function parseJwt (token) {
     try {
@@ -137,9 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Manejar el inicio de sesión
     const loginForm = document.getElementById('loginForm');
+
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const username = document.getElementById('loginUsername').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
 
@@ -155,24 +127,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ username, password })
                 });
 
+                if (!response.ok) {
+                    // Manejando el error de autenticación 401 (Unauthorized)
+                    const errorData = await response.json();
+                    alert(errorData.message);
+                    return;
+                }
+
                 const data = await response.json();
-                if (response.ok) {
-                    alert(data.message);
-                    localStorage.setItem('token', data.token);
-                    const decoded = parseJwt(data.token);
-                    if (decoded.role === 'admin') {
-                        window.location.href = 'admin.html';
-                    } else {
-                        window.location.href = 'shop.html';
-                    }
+                alert(data.message);
+
+                // Almacena el token y decodifica el rol
+                localStorage.setItem('token', data.token);
+                const decodedToken = parseJwt(data.token);
+                console.log('Rol del usuario:', decodedToken.role);
+
+                // Redirige según el rol
+                if (decodedToken.role === 'admin') {
+                    window.location.href = 'admin.html';
                 } else {
-                    alert(data.message);
+                    window.location.href = 'shop.html';
                 }
             } catch (error) {
                 console.error('Error al iniciar sesión:', error);
                 alert('Ocurrió un error. Por favor, intenta nuevamente.');
             }
         });
+    }
+
+     // Función para decodificar el JWT
+    function parseJwt(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
     }
 
     // Manejar el formulario de agregar producto
@@ -371,4 +362,118 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // Mostrar detalles de la factura en factura.html
+    const displayInvoice = () => {
+        const invoiceDiv = document.getElementById('invoice');
+        if (invoiceDiv) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Debes iniciar sesión para ver la factura.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            fetch('http://localhost:3000/orders', {
+                headers: { 
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(orders => {
+                    if (orders.length === 0) {
+                        invoiceDiv.innerHTML = '<p>No tienes compras realizadas.</p>';
+                        return;
+                    }
+
+                    const lastOrder = orders[orders.length - 1];
+                    let invoiceHTML = `
+                        <p><strong>ID de Compra:</strong> ${lastOrder.id}</p>
+                        <p><strong>Fecha:</strong> ${new Date(lastOrder.fecha).toLocaleString()}</p>
+                        <h4>Productos:</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    lastOrder.productos.forEach(item => {
+                        const subtotal = item.precio * item.cantidad;
+                        invoiceHTML += `
+                            <tr>
+                                <td>${item.nombre}</td>
+                                <td>${item.cantidad}</td>
+                                <td>$${item.precio.toFixed(2)}</td>
+                                <td>$${subtotal.toFixed(2)}</td>
+                            </tr>
+                        `;
+                    });
+                    invoiceHTML += `
+                            </tbody>
+                        </table>
+                        <h4 class="text-right">Total: $${lastOrder.total.toFixed(2)}</h4>
+                    `;
+                    invoiceDiv.innerHTML = invoiceHTML;
+                })
+                .catch(error => console.error('Error al cargar la factura:', error));
+        }
+    };
+
+    displayInvoice();
+
+
+
+    
+
+    // Manejar el cierre de sesión
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            alert('Sesión cerrada exitosamente.');
+            window.location.href = 'index.html';
+        });
+    }
+
+    // Función para agregar productos al carrito
+    window.addToCart = function(productId) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cart.find(item => item.productoId === productId);
+        if (existingItem) {
+            existingItem.cantidad += 1;
+        } else {
+            cart.push({ productoId: productId, cantidad: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Producto agregado al carrito.');
+    };
+
+    // Función para decodificar JWT
+    function parseJwt (token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    };
+
 });
+
+// Navbar toggle
+
+var nav = $("#navbarSupportedContent");
+        var btn = $(".custom_menu-btn");
+        btn.click
+        btn.click(function (e) {
+    
+          e.preventDefault();
+          nav.toggleClass("lg_nav-toggle");
+          document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style")
+        });

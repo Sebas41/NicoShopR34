@@ -1,8 +1,12 @@
+// app.js
+
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+
+// Importar rutas
 const authRoutes = require('./routes/auth');
 const productosRoutes = require('./routes/productos');
 const carritoRoutes = require('./routes/carrito');
@@ -10,19 +14,20 @@ const ordersRoutes = require('./routes/orders');
 
 const app = express();
 
+// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Configuración para servir archivos estáticos desde la carpeta 'public'
+// Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rutas de la API
+// Usar rutas
 app.use('/auth', authRoutes);
 app.use('/productos', productosRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/orders', ordersRoutes);
 
-// Rutas para páginas HTML específicas
+// Rutas adicionales
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -54,6 +59,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Algo salió mal' });
 });
 
+// Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

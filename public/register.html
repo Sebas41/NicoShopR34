@@ -8,45 +8,60 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Incluir la Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.html">Tienda En Línea</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-            <li class="nav-item">
-              <a class="nav-link" href="shop.html">Tienda</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">Acerca de</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contacto</a>
-            </li>
-            <li class="nav-item" id="loginNav">
-              <a class="nav-link" href="login.html">Iniciar Sesión</a>
-            </li>
-            <li class="nav-item" id="registerNav">
-              <a class="nav-link" href="register.html">Registrarse</a>
-            </li>
-            <li class="nav-item" id="cartNav">
-              <a class="nav-link" href="carrito.html">Carrito</a>
-            </li>
-            <li class="nav-item d-none" id="adminNav">
-              <a class="nav-link" href="admin.html">Administración</a>
-            </li>
-            <li class="nav-item d-none" id="logoutNav">
-              <a class="nav-link" href="#" id="logoutBtn">Cerrar Sesión</a>
-            </li>
-          </ul>
+    <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <img src="images/logo.png" alt="" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class=" navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="register.html"> Register </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html">Contact us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="carrito.html">carrito</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin.html">Admin</a>
+                </li>
+                <li class="nav-item d-none" id="logoutNav">
+                  <a class="nav-link" href="#" id="logoutBtn">Cerrar Sesión</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="custom_menu-btn ">
+                <button>
+                  <span class=" s-1">
+                  </span>
+                  <span class="s-2">
+                  </span>
+                  <span class="s-3">
+                  </span>
+                </button>
+              </div>
+            </div>
+          </nav>
         </div>
-      </nav>
+      </header>
 
     <!-- Formulario de Registro -->
     <div class="container mt-5">

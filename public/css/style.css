@@ -1046,7 +1046,7 @@ a:focus {
   display: block;
   width: 34px;
   height: 3.5px;
-  background-color: #fff;
+  background-color: black;
   margin: 8.5px 0;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
