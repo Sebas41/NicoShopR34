@@ -10,8 +10,13 @@ class DataBase {
   }
 
   readData() {
-    const data = fs.readFileSync(this.filePath);
-    return JSON.parse(data);
+    try {
+      const data = fs.readFileSync(this.filePath, 'utf8');
+      return data ? JSON.parse(data) : [];
+    } catch (error) {
+      console.error('Error al leer el archivo:', error);
+      return [];
+    }
   }
 
   writeData(data) {
