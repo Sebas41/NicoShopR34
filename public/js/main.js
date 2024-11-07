@@ -230,4 +230,145 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // Cargar lista completa de productos en shop.html
+    const loadProductList = () => {
+        const productListDiv = document.getElementById('productList');
+        if (productListDiv) {
+            fetch('http://localhost:3000/productos')
+                .then(response => response.json())
+                .then(products => {
+                    productListDiv.innerHTML = '';
+                    products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'col-md-4';
+                        productCard.innerHTML = `
+                            <div class="card mb-4 shadow-sm">
+                                <img src="public/images/${product.imagen || 'default.jpg'}" class="card-img-top" alt="${product.nombre}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.nombre}</h5>
+                                    <p class="card-text">${product.descripcion.substring(0, 100)}...</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-primary">$${product.precio}</span>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart(${product.id})">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        productListDiv.appendChild(productCard);
+                    });
+                })
+                .catch(error => console.error('Error al cargar productos:', error));
+        }
+    };
+
+    loadProductList();
+
+
+    // Mostrar los items en el carrito
+    const displayCart = () => {
+        const cartItemsDiv = document.getElementById('cartItems');
+        if (cartItemsDiv) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Tu carrito está vacío.</p>';
+                return;
+            }
+
+            fetch('http://localhost:3000/productos')
+                .then(response => response.json())
+                .then(products => {
+                    let total = 0;
+                    let cartHTML = `
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    cart.forEach(item => {
+                        const product = products.find(p => p.id === item.productoId);
+                        if (product) {
+                            const subtotal = product.precio * item.cantidad;
+                            total += subtotal;
+                            cartHTML += `
+                                <tr>
+                                    <td>${product.nombre}</td>
+                                    <td>$${product.precio.toFixed(2)}</td>
+                                    <td>${item.cantidad}</td>
+                                    <td>$${subtotal.toFixed(2)}</td>
+                                    <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${product.id})">Eliminar</button></td>
+                                </tr>
+                            `;
+                        }
+                    });
+                    cartHTML += `
+                            </tbody>
+                        </table>
+                        <h4 class="text-right">Total: $${total.toFixed(2)}</h4>
+                    `;
+                    cartItemsDiv.innerHTML = cartHTML;
+                })
+                .catch(error => console.error('Error al cargar el carrito:', error));
+        }
+    };
+
+    displayCart();
+
+    // Manejar la eliminación de un producto del carrito
+    window.removeFromCart = function(productId) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart = cart.filter(item => item.productoId !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+    };
+
+    // Manejar la compra
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', async () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío.');
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Debes iniciar sesión para realizar una compra.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/carrito/comprar', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ items: cart })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(data.message);
+                    localStorage.removeItem('cart');
+                    window.location.href = 'factura.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error al realizar la compra:', error);
+                alert('Ocurrió un error. Por favor, intenta nuevamente.');
+            }
+        });
+    }
+
 });

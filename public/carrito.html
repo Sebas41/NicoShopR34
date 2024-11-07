@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Tienda - Tienda En Línea</title>
+    <title>Carrito - Tienda En Línea</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -10,11 +10,14 @@
     <!-- Navbar -->
     <div id="navbar"></div>
 
-    <!-- Lista de Productos -->
+    <!-- Carrito de Compras -->
     <div class="container mt-5">
-        <h2 class="text-center">Productos Disponibles</h2>
-        <div class="row" id="productList">
-            <!-- Los productos se cargarán dinámicamente aquí -->
+        <h2 class="text-center">Tu Carrito de Compras</h2>
+        <div id="cartItems" class="mt-4">
+            <!-- Los items del carrito se cargarán dinámicamente aquí -->
+        </div>
+        <div class="text-right mt-3">
+            <button class="btn btn-success" id="checkoutBtn">Realizar Compra</button>
         </div>
     </div>
 
