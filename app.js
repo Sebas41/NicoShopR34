@@ -5,18 +5,25 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
+
 
 // Importar rutas
 const authRoutes = require('./routes/auth');
 const productosRoutes = require('./routes/productos');
-const carritoRoutes = require('./routes/carrito');
-const ordersRoutes = require('./routes/orders');
+// Puedes agregar más rutas como carrito, orders, etc.
+
+const uploadDir = path.join(__dirname, 'public', 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const app = express();
 
 // Middleware
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
@@ -24,8 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Usar rutas
 app.use('/auth', authRoutes);
 app.use('/productos', productosRoutes);
-app.use('/carrito', carritoRoutes);
-app.use('/orders', ordersRoutes);
+// Agregar otras rutas aquí...
 
 // Rutas adicionales
 app.get('/', (req, res) => {
@@ -46,6 +52,10 @@ app.get('/furniture', (req, res) => {
 
 app.get('/shop', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'shop.html'));
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Manejo de rutas no encontradas

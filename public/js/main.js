@@ -166,61 +166,86 @@ document.addEventListener('DOMContentLoaded', () => {
         return JSON.parse(jsonPayload);
     }
 
-    // Manejar el formulario de agregar producto
-    const addProductForm = document.getElementById('addProductForm');
-    if (addProductForm) {
-        addProductForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const nombre = document.getElementById('productName').value.trim();
-            const descripcion = document.getElementById('productDescription').value.trim();
-            const precio = parseFloat(document.getElementById('productPrice').value);
-            const cantidad = parseInt(document.getElementById('productQuantity').value, 10);
-            const imagenInput = document.getElementById('productImage');
-            let imagen = '';
+// Manejar el formulario de agregar producto
+const addProductForm = document.getElementById('addProductForm');
+if (addProductForm) {
+    addProductForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            if (imagenInput.files.length > 0) {
-                // Opcional: Manejo de subida de imágenes
-                const file = imagenInput.files[0];
-                // Para simplificar, asumiremos que las imágenes se cargan manualmente en el servidor
-                imagen = file.name; // Nombre del archivo
-            }
+        // Crear un objeto FormData
+        const formData = new FormData();
+        formData.append('nombre', document.getElementById('productName').value.trim());
+        formData.append('descripcion', document.getElementById('productDescription').value.trim());
+        formData.append('precio', parseFloat(document.getElementById('productPrice').value));
+        formData.append('cantidad', parseInt(document.getElementById('productQuantity').value, 10));
 
-            if (nombre === '' || descripcion === '' || isNaN(precio) || isNaN(cantidad)) {
-                alert('Por favor, completa todos los campos correctamente.');
-                return;
-            }
+        // Añadir el archivo de imagen si está presente
+        const imagenInput = document.getElementById('productImage');
+        if (imagenInput.files && imagenInput.files[0]) {
+            formData.append('productImage', imagenInput.files[0]);
+        }
 
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('No estás autenticado.');
-                window.location.href = 'login.html';
-                return;
-            }
+        try {
+            const response = await fetch('/productos/agregar', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` // Incluir el token si es necesario
+                },
+                body: formData // Enviar FormData
+            });
 
-            try {
-                const response = await fetch('http://localhost:3000/productos/agregar', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ nombre, descripcion, precio, cantidad, imagen })
-                });
-
+            if (response.ok) {
                 const data = await response.json();
-                if (response.ok) {
-                    alert(data.message);
-                    addProductForm.reset();
-                } else {
-                    alert(data.message);
-                }
-            } catch (error) {
-                console.error('Error al agregar producto:', error);
-                alert('Ocurrió un error. Por favor, intenta nuevamente.');
+                alert('Producto agregado con éxito');
+                console.log('Producto agregado:', data);
+                
+                // Limpiar los campos del formulario
+                addProductForm.reset();
+            } else {
+                const errorData = await response.json();
+                alert('Error al agregar producto: ' + errorData.message);
+                console.error('Error:', errorData);
             }
-        });
-    }
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error);
+            alert('Error al enviar el formulario');
+        }
+    });
+}
 
+
+
+    // Función para agregar producto
+    async function agregarProducto(producto) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Debes iniciar sesión como administrador para agregar productos.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/productos/agregar', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(producto)
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message);
+                addProductForm.reset(); // Limpiar el formulario
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error('Error al agregar producto:', error);
+            alert('Ocurrió un error. Por favor, intenta nuevamente.');
+        }
+    }
 
     // Cargar lista completa de productos en shop.html
     const loadProductList = () => {

@@ -1,4 +1,5 @@
 <!-- public/admin.html -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,7 +9,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Incluir la Navbar -->
     <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -40,9 +40,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="carrito.html">carrito</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin.html">Admin</a>
-                </li>
                 <li class="nav-item d-none" id="logoutNav">
                   <a class="nav-link" href="#" id="logoutBtn">Cerrar Sesión</a>
                 </li>
@@ -64,12 +61,12 @@
         </div>
       </header>
 
-    <!-- Formulario de Agregar Producto -->
+    <!-- Formulario para Agregar Producto -->
     <div class="container mt-5">
         <h2 class="text-center">Agregar Nuevo Producto</h2>
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <form id="addProductForm">
+            <div class="col-md-6">
+                <form id="addProductForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="productName">Nombre del Producto</label>
                         <input type="text" class="form-control" id="productName" required>
@@ -87,7 +84,7 @@
                         <input type="number" class="form-control" id="productQuantity" min="0" required>
                     </div>
                     <div class="form-group">
-                        <label for="productImage">Imagen (opcional)</label>
+                        <label for="productImage">Imagen del Producto</label>
                         <input type="file" class="form-control-file" id="productImage" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Agregar Producto</button>
@@ -96,13 +93,19 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start mt-5">
-      <div class="text-center p-3">
-        © 2024 Tienda En Línea
-      </div>
-    </footer>
+      <!-- footer section -->
+  <section class="container-fluid footer_section ">
+    <div class="container">
+      <p>
+        &copy; 2024 All Rights Reserved By
+        <a href="https://html.design/">NicoShopR34s</a>
+      </p>
+    </div>
+  </section>
+  <!-- end  footer section -->
 
+
+    <!-- Scripts -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/main.js"></script>

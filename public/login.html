@@ -1,122 +1,126 @@
 <!-- public/login.html -->
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <!-- Basic -->
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- Mobile Metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- Site Metas -->
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-      
-        <title>Digitf</title>
-      
-        <!-- slider stylesheet -->
-        <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
-      
-        <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-      
-        <!-- fonts style -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- responsive style -->
-        <link href="css/responsive.css" rel="stylesheet" />
-      </head>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Digitf</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
 <body>
 
-    <header class="header_section">
-        <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="index.html">
-              <img src="images/logo.png" alt="" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+  <header class="header_section">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg custom_nav-container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/logo.png" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class=" navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav  ">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html"> About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="register.html"> Register </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="carrito.html">carrito</a>
+            </li>
+            <li class="nav-item d-none" id="logoutNav">
+              <a class="nav-link" href="#" id="logoutBtn">Cerrar Sesión</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="custom_menu-btn ">
+            <button>
+              <span class=" s-1">
+              </span>
+              <span class="s-2">
+              </span>
+              <span class="s-3">
+              </span>
             </button>
-  
-            <div class=" navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav  ">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="login.html">Login </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="register.html"> Register </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="carrito.html">carrito</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin.html">Admin</a>
-                </li>
-                <li class="nav-item d-none" id="logoutNav">
-                  <a class="nav-link" href="#" id="logoutBtn">Cerrar Sesión</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div class="custom_menu-btn ">
-                <button>
-                  <span class=" s-1">
-                  </span>
-                  <span class="s-2">
-                  </span>
-                  <span class="s-3">
-                  </span>
-                </button>
-              </div>
-            </div>
-          </nav>
+          </div>
         </div>
-      </header>
-
-    <!-- Formulario de Inicio de Sesión -->
-    <div class="container mt-5">
-        <h2 class="text-center">Iniciar Sesión</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginUsername">Usuario</label>
-                        <input type="text" class="form-control" id="loginUsername" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Contraseña</label>
-                        <input type="password" class="form-control" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-                </form>
-            </div>
-        </div>
+      </nav>
     </div>
+  </header>
 
-    <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start mt-5">
-      <div class="text-center p-3">
-        © 2024 Tienda En Línea
+  <!-- Formulario de Inicio de Sesión -->
+  <div class="container mt-5">
+    <h2 class="text-center">Iniciar Sesión</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginUsername">Usuario</label>
+            <input type="text" class="form-control" id="loginUsername" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" class="form-control" id="loginPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+        </form>
       </div>
-    </footer>
+    </div>
+  </div>
 
-    
+  <!-- footer section -->
+  <section class="container-fluid footer_section ">
+    <div class="container">
+      <p>
+        &copy; 2024 All Rights Reserved By
+        <a href="https://html.design/">NicoShopR34s</a>
+      </p>
+    </div>
+  </section>
+  <!-- end  footer section -->
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/main.js"></script>
+
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/main.js"></script>
 
 </body>
+
 </html>
