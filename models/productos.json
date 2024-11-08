@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": 1731041613394,
+    "nombre": "Carro",
+    "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+    "precio": 30000000,
+    "cantidad": 1,
+    "imagen": "/uploads/1731041613390-492247145.jpg"
+  },
+  {
+    "id": 1731041699033,
+    "nombre": "moto",
+    "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+    "precio": 15000000,
+    "cantidad": 1,
+    "imagen": "/uploads/1731041699029-308475842.jpg"
+  },
+  {
+    "id": 1731042093308,
+    "nombre": "Cicla",
+    "descripcion": "Cicla forsuda la uso Cristiano Ronalod, Messi y Neymar",
+    "precio": 3000000,
+    "cantidad": 1,
+    "imagen": "/uploads/1731042093306-622556530.jpg"
+  }
+]

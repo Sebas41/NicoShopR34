@@ -1073,4 +1073,11 @@ a:focus {
   -webkit-transform: rotate(-45deg) translate(7px, -10px);
           transform: rotate(-45deg) translate(7px, -10px);
 }
+
+.card-img-top {
+  width: 100%;             /* Ocupa todo el ancho de la tarjeta */
+  height: 200px;           /* Altura fija para mantener la uniformidad */
+  object-fit: cover;       /* Asegura que la imagen se ajuste al tamaño sin deformarse */
+  object-position: center; /* Centra la imagen dentro del contenedor */
+}
 /*# sourceMappingURL=style.css.map */

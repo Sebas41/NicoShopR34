@@ -1,33 +1,5 @@
 [
   {
-    "id": 1731006134183,
-    "username": "oscar",
-    "password": "$2a$10$0mI/1UsYxxCM6iZvyIYMHeQd4pMuZ1R0FBQ8v08Rv0m2DgZPKFOQO",
-    "salt": "bfe2fa70577d042b25f57e6db97dc902",
-    "role": "cliente"
-  },
-  {
-    "id": 1731006200279,
-    "username": "pepe",
-    "password": "$2a$10$1jPLlpCoHWDutaXMXD5SWuDfzqWItHhAfRfaKo7mJn31fbpLWHj1e",
-    "salt": "dc34dc9543ba9a4ee38ad028ba023ae4",
-    "role": "cliente"
-  },
-  {
-    "id": 1731006263193,
-    "username": "lup",
-    "password": "$2a$10$ydD/muLbR8lyzRnZbfArd.khL.ojij83F27BfIhao7KidV4C.Wvvq",
-    "salt": "ea5c079c86a484242492e30efcc9d05d",
-    "role": "cliente"
-  },
-  {
-    "id": 1731006586103,
-    "username": "chamo",
-    "password": "966dc362546439b4c43f68e6ed790ffffcce96ba711a82a2cc39911a60e12dc69765fb5cd758d134beb5e846bdf0f96e3f8d168ba0bb69b3183b122b3b845055",
-    "salt": "45c105402325fca1431a6036ec62bb34",
-    "role": "cliente"
-  },
-  {
     "id": 1731007463332,
     "username": "admin",
     "password": "26262437a3964667b222ac9173660d0ddbebb14e8a1b098a5fd5e1107c8ef8da4ff07471ded57dd660d3293ee403f058a4b411d875e2cc91f97e1de19f82fdf7",
@@ -35,17 +7,10 @@
     "role": "admin"
   },
   {
-    "id": 1731039930111,
-    "username": "lupe",
-    "password": "015e9e4f570f7e11bd1a3d253a3ff2a901e862afd499ac3feb2ff86229beca281ab2652449b92a090a1af031bb591f3cc524ade5f9870d337ce687aca5699fe6",
-    "salt": "32fe5705324fd05dc96e4d26cd35ec74",
-    "role": "cliente"
-  },
-  {
-    "id": 1731040435309,
-    "username": "vero",
-    "password": "b968c24a1d5d9381012ab20ced7344c24f7cb7917081d461faaf4015e7c810e9e449de165eda6823dad6273d410f7dd8c3a38afc4236bc32d5dab1fc91791d56",
-    "salt": "e54397e078e0c60a2a28cdfb0847364e",
+    "id": 1731041480884,
+    "username": "oscar",
+    "password": "52667ac02c60269c0aac21bdebce53a9e0fc9f0eab73cf530dea7727aa47286c866c4593cd6bb1b10d899888402c9fd6f4df99f5a0177c3f5134adcc314edac8",
+    "salt": "5bd43bda412670418ab775cf6c238d78",
     "role": "cliente"
   }
 ]
