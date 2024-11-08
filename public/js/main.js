@@ -247,38 +247,41 @@ if (addProductForm) {
         }
     }
 
-    // Cargar lista completa de productos en shop.html
-    const loadProductList = () => {
-        const productListDiv = document.getElementById('productList');
-        if (productListDiv) {
-            fetch('http://localhost:3000/productos')
-                .then(response => response.json())
-                .then(products => {
-                    productListDiv.innerHTML = '';
-                    products.forEach(product => {
-                        const productCard = document.createElement('div');
-                        productCard.className = 'col-md-4';
-                        productCard.innerHTML = `
-                            <div class="card mb-4 shadow-sm">
-                                <img src="public/images/${product.imagen || 'default.jpg'}" class="card-img-top" alt="${product.nombre}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${product.nombre}</h5>
-                                    <p class="card-text">${product.descripcion.substring(0, 100)}...</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-primary">$${product.precio}</span>
-                                        <button class="btn btn-sm btn-outline-primary" onclick="addToCart(${product.id})">Agregar</button>
-                                    </div>
+   // Cargar lista completa de productos en shop.html
+const loadProductList = () => {
+    const productListDiv = document.getElementById('productList');
+    if (productListDiv) {
+        fetch('http://localhost:3000/productos')
+            .then(response => response.json())
+            .then(products => {
+                productListDiv.innerHTML = '';
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'col-md-4';
+
+                    // Cambia la ruta para que apunte a /uploads/
+                    productCard.innerHTML = `
+                        <div class="card mb-4 shadow-sm">
+                            <img src="${product.imagen || '/uploads/default.jpg'}" class="card-img-top" alt="${product.nombre}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.nombre}</h5>
+                                <p class="card-text">${product.descripcion.substring(0, 100)}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary">$${product.precio}</span>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="addToCart(${product.id})">Agregar</button>
                                 </div>
                             </div>
-                        `;
-                        productListDiv.appendChild(productCard);
-                    });
-                })
-                .catch(error => console.error('Error al cargar productos:', error));
-        }
-    };
+                        </div>
+                    `;
+                    productListDiv.appendChild(productCard);
+                });
+            })
+            .catch(error => console.error('Error al cargar productos:', error));
+    }
+};
 
-    loadProductList();
+loadProductList();
+
 
 
     // Mostrar los items en el carrito

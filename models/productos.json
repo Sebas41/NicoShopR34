@@ -1,18 +1,1 @@
-[
-  {
-    "id": 1731036771150,
-    "nombre": "Carro",
-    "descripcion": "sd",
-    "precio": 2,
-    "cantidad": 2,
-    "imagen": "/uploads/1731036771144-119937058.jpg"
-  },
-  {
-    "id": 1731037351411,
-    "nombre": "Moto",
-    "descripcion": "asd",
-    "precio": 222222,
-    "cantidad": 1,
-    "imagen": "/uploads/1731037351405-880259469.jpg"
-  }
-]
+[]
