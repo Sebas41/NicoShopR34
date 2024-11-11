@@ -57,12 +57,19 @@ body {
 /*header section*/
 .hero_area {
   height: 100vh;
-  background-image: url(../images/hero-bg.jpg);
   background-size: cover;
   position: relative;
   background-repeat: no-repeat;
   overflow: hidden;
 }
+
+.img-custom-size {
+  width: 1000px;
+  height: 220px;
+  margin-left: 18px; /* Ajusta el valor según el desplazamiento que desees */
+
+}
+
 
 .hero_area::after {
   content: "";
@@ -347,7 +354,7 @@ a:focus {
 }
 
 .slider_section .img-container .img-box {
-  width: 250px;
+  width: 65%;
 }
 
 .slider_section .img-container .img-box img {

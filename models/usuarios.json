@@ -12,5 +12,12 @@
     "password": "52667ac02c60269c0aac21bdebce53a9e0fc9f0eab73cf530dea7727aa47286c866c4593cd6bb1b10d899888402c9fd6f4df99f5a0177c3f5134adcc314edac8",
     "salt": "5bd43bda412670418ab775cf6c238d78",
     "role": "cliente"
+  },
+  {
+    "id": 1731278743052,
+    "username": "andres",
+    "password": "0d5393509be0f3e7f884923d66ea3ecf6b694e6990256deb4c95b9388d33787f02f1aceed720dcd8655aaa171d6e64174291fb8c6e29b8106da20d6f18beef96",
+    "salt": "b05ce5ec7429cc8b0739398632f0460e",
+    "role": "cliente"
   }
 ]
