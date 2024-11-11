@@ -19,5 +19,12 @@
     "password": "0d5393509be0f3e7f884923d66ea3ecf6b694e6990256deb4c95b9388d33787f02f1aceed720dcd8655aaa171d6e64174291fb8c6e29b8106da20d6f18beef96",
     "salt": "b05ce5ec7429cc8b0739398632f0460e",
     "role": "cliente"
+  },
+  {
+    "id": 1731346434310,
+    "username": "juan andres",
+    "password": "9cc0b545c16dc9a10f321a8bcd3aedae88070d3aace31aacd2eaf143d5ad13476e14780c0a8cc4a58ae937a83fe0961e1fa7d593c2aa6c1fc5801bcca4bfd772",
+    "salt": "0b45b8bb41df3e7e3695679c66a7605b",
+    "role": "cliente"
   }
 ]

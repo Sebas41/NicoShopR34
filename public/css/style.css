@@ -105,6 +105,53 @@ body {
 }
 
 
+.about_section .container {
+  max-width: 900px;
+}
+
+.about_section {
+  padding-top: 20px !important; /* Reduce el padding superior */
+}
+
+/* Aumenta el tamaño de las entradas */
+.input-large {
+  height: 50px; /* Ajusta la altura */
+  font-size: 1.2rem; /* Aumenta el tamaño de la fuente */
+  padding: 15px; /* Espacio interno */
+}
+
+/* Ajusta el botón */
+.btn-large {
+  height: 50px; /* Altura del botón */
+  font-size: 1.2rem;
+}
+
+/* Ajusta el ancho del contenedor del formulario */
+.detail-box {
+  width: 100%;
+  padding: 40px 60px; /* Aumenta el padding interno */
+}
+
+
+#registerForm {
+  max-width: 100%; /* Asegura que el formulario ocupe todo el ancho permitido por la columna */
+}
+
+#registerForm label {
+  font-size: 1.2rem;
+}
+
+#registerForm input {
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 1.1rem;
+}
+
+#registerForm .btn-success {
+  font-size: 1.1rem;
+  padding: 12px;
+}
+
 .hero_area::after {
   content: "";
   position: absolute;
