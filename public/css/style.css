@@ -132,6 +132,11 @@ body {
   padding: 40px 60px; /* Aumenta el padding interno */
 }
 
+.detail-box label {
+  font-size: 1.1rem; /* Aumenta el tamaño de la fuente */
+  font-weight: bold; /* Aplica el mismo peso de fuente */
+}
+
 
 #registerForm {
   max-width: 100%; /* Asegura que el formulario ocupe todo el ancho permitido por la columna */
