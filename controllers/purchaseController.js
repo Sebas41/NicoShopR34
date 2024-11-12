@@ -1,4 +1,6 @@
 const DataBase = require('./dataBaseController');
+const path = require('path');
+const fs = require('fs');
 const { generarFactura } = require('../utils/generateInvoice');
 
 const cartDb = new DataBase('carritos');
@@ -37,54 +39,44 @@ function addToCart(req, res) {
   res.status(201).json({ message: 'Producto agregado al carrito', cart });
 }
 
+
 function checkout(req, res) {
-  const userId = req.user.id;
-  console.log("User ID en checkout:", userId); // Verifica el userId autenticado
+    const userId = req.user.id;
+    const allCarts = cartDb.readData();
+    const cart = allCarts.find(c => c.userId === userId);
 
-  // Leer todos los carritos desde el archivo JSON
-  const allCarts = cartDb.readData();
-  console.log("Contenido actual de cartDb:", allCarts); // Verifica el contenido de todos los carritos
+    if (!cart || cart.productos.length === 0) {
+        return res.status(400).json({ message: 'Carrito vacío' });
+    }
 
-  // Encontrar el carrito correspondiente al usuario
-  const cart = allCarts.find(c => c.userId === userId);
-  console.log("Carrito encontrado para el checkout:", cart); // Verifica el carrito del usuario
+    let total = 0;
+    const orderProducts = cart.productos.map(item => {
+        const product = productDb.readData().find(p => p.id === item.productoId);
+        if (!product || product.cantidad < item.cantidad) {
+            return res.status(400).json({ message: `Producto no disponible o cantidad insuficiente` });
+        }
 
-  // Verificar si el carrito está vacío o no existe
-  if (!cart || cart.productos.length === 0) {
-      return res.status(400).json({ message: 'Carrito vacío' });
-  }
+        product.cantidad -= item.cantidad;
+        total += product.precio * item.cantidad;
+        return { ...product, cantidad: item.cantidad };
+    });
 
-  let total = 0;
-  const orderProducts = cart.productos.map(item => {
-      const product = productDb.readData().find(p => p.id === item.productoId);
+    productDb.writeData(productDb.readData().map(p => {
+        const purchasedProduct = orderProducts.find(op => op.id === p.id);
+        return purchasedProduct ? { ...p, cantidad: p.cantidad } : p;
+    }));
 
-      if (!product || product.cantidad < item.cantidad) {
-          return res.status(400).json({ message: `Producto ${product ? product.nombre : item.productoId} no disponible o cantidad insuficiente` });
-      }
+    const order = { id: Date.now(), userId: userId, productos: orderProducts, total, fecha: new Date().toISOString() };
+    orderDb.writeData([...orderDb.readData(), order]);
 
-      // Restar la cantidad comprada del inventario
-      product.cantidad -= item.cantidad;
-      total += product.precio * item.cantidad;
-      return { ...product, cantidad: item.cantidad };
-  });
+    cart.productos = [];
+    cartDb.writeData(allCarts.map(c => (c.userId === userId ? cart : c)));
 
-  // Actualizar el inventario en `productos.json`
-  productDb.writeData(productDb.readData().map(p => {
-      const purchasedProduct = orderProducts.find(op => op.id === p.id);
-      return purchasedProduct ? { ...p, cantidad: p.cantidad } : p;
-  }));
+    const facturaPath = generarFactura(order, req.user, orderProducts);
 
-  // Crear y guardar la orden en `orders.json`
-  const order = { id: Date.now(), userId: userId, productos: orderProducts, total, fecha: new Date().toISOString() };
-  orderDb.writeData([...orderDb.readData(), order]);
-
-  // Limpia el carrito después de la compra
-  cart.productos = [];
-  cartDb.writeData(allCarts.map(c => (c.userId === userId ? cart : c)));
-
-  // Generar factura si está habilitada
-  const facturaPath = generarFactura(order, req.user, orderProducts);
-  res.status(201).json({ message: 'Compra realizada con éxito', order, factura: facturaPath });
+    // Enviar primero el status 201 y el mensaje de éxito
+    res.status(201).json({ message: 'Compra realizada con éxito', facturaUrl: `/facturas/${path.basename(facturaPath)}` });
 }
+
 
 module.exports = { addToCart, checkout };

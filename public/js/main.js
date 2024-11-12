@@ -408,66 +408,79 @@ loadProductList();
 
     // Manejar la compra
     const checkoutBtn = document.getElementById('checkoutBtn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', async () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('Debes iniciar sesión para realizar una compra.');
-                window.location.href = 'login.html';
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Debes iniciar sesión para realizar una compra.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            // Obtén el carrito del usuario desde el backend
+            const carritoResponse = await fetch('http://localhost:3000/carrito', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const carritoData = await carritoResponse.json();
+
+            // Revisa si el carrito está vacío
+            if (!carritoData.productos || carritoData.productos.length === 0) {
+                alert('Tu carrito está vacío.');
                 return;
             }
-    
-            try {
-                // Obtén el carrito del usuario desde el backend
-                const carritoResponse = await fetch('http://localhost:3000/carrito', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-    
-                const carritoData = await carritoResponse.json();
-    
-                // Revisa si el carrito está vacío
-                if (carritoData.productos.length === 0) {
-                    alert('Tu carrito está vacío.');
-                    return;
-                }
-    
-                // Realiza el checkout usando el carrito del backend
-                const response = await fetch('http://localhost:3000/carrito/comprar', {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ items: carritoData.productos })
-                });
-    
-                const data = await response.json();
-                if (response.ok) {
-                    alert(data.message);
-                    displayCart(); // Refresca el carrito
-                    window.location.href = 'factura.html'; // Redirige a la página de factura
+
+            // Realiza el checkout usando el carrito del backend
+            fetch('http://localhost:3000/carrito/comprar', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ items: carritoData.productos })
+            })
+            .then(response => {
+                if (response.status === 201) {
+                    return response.json();
                 } else {
-                    alert(data.message);
+                    throw new Error('Error al completar la compra');
                 }
-            } catch (error) {
-                console.error('Error al realizar la compra:', error);
-                alert('Ocurrió un error. Por favor, intenta nuevamente.');
-            }
-        });
-    }
+            })
+            .then(data => {
+                alert(data.message); // Mostrar el mensaje de éxito
+                if (data.facturaUrl) {
+                    const link = document.createElement('a');
+                    link.href = data.facturaUrl;
+                    link.setAttribute('download', `factura_${new Date().toISOString()}.pdf`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    window.location.reload(); 
+
+                }
+            })
+            .catch(error => console.error('Error:', error));            
+        } catch (error) {
+            console.error('Error al procesar el carrito:', error);
+            alert('Ocurrió un error al procesar el carrito.');
+        }
+    });
+}
 
 
     // Mostrar detalles de la factura en factura.html
     const displayInvoice = async () => {
-        // Obtener el `orderId` de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const orderId = urlParams.get('orderId');
+        console.log('Order ID obtenido:', orderId); // Para confirmar que se obtiene el ID
     
         if (!orderId) {
-            alert('Factura no encontrada');
+            alert('No se encontró el ID de la orden.');
             return;
         }
     
@@ -476,15 +489,17 @@ loadProductList();
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
             const order = await response.json();
+            console.log('Datos de la factura:', order); // Verifica los datos que devuelve el backend
     
             if (!order || order.error) {
                 alert('Error al cargar la factura.');
                 return;
             }
     
+            // Código para mostrar los datos en el HTML
             const invoiceDiv = document.getElementById('invoice');
             let invoiceHTML = `
-                <p><strong>ID de Compra:</strong> ${order._id}</p>
+                <p><strong>ID de Compra:</strong> ${order.id}</p>
                 <p><strong>Fecha:</strong> ${new Date(order.fecha).toLocaleString()}</p>
                 <h4>Productos:</h4>
                 <table class="table table-bordered">
@@ -498,12 +513,12 @@ loadProductList();
                     </thead>
                     <tbody>
             `;
-            
-            order.items.forEach(item => {
+    
+            order.productos.forEach(item => {
                 const subtotal = item.precioUnitario * item.cantidad;
                 invoiceHTML += `
                     <tr>
-                        <td>${item.productoId.nombre}</td>
+                        <td>${item.nombre}</td>
                         <td>${item.cantidad}</td>
                         <td>$${item.precioUnitario.toFixed(2)}</td>
                         <td>$${subtotal.toFixed(2)}</td>
@@ -518,6 +533,7 @@ loadProductList();
             `;
     
             invoiceDiv.innerHTML = invoiceHTML;
+    
         } catch (error) {
             console.error('Error al cargar la factura:', error);
             alert('Error al cargar la factura.');
@@ -527,6 +543,7 @@ loadProductList();
     // Llama a `displayInvoice` cuando el DOM esté cargado
     document.addEventListener('DOMContentLoaded', displayInvoice);
     
+    
 
     // Manejar el cierre de sesión
     const logoutBtn = document.getElementById('logoutBtn');
@@ -534,7 +551,7 @@ loadProductList();
         logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('token');
             alert('Sesión cerrada exitosamente.');
-            window.location.href = 'index.html';
+            window.location.href = `factura.html?orderId=${orderId}`;
         });
     }
 

@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
 
 // Importar rutas
 const authRoutes = require('./routes/auth');
@@ -25,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', authRoutes);
 app.use('/productos', productosRoutes);
 app.use('/carrito', carritoRoutes);  // Asegúrate de usar este enrutador
+app.use('/facturas', express.static(path.join(__dirname, 'facturas')));
 
 
 // Rutas adicionales
@@ -37,6 +37,22 @@ app.use((req, res) => res.status(404).json({ message: 'Ruta no encontrada' }));
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Algo salió mal' });
+});
+
+app.get('/download-factura/:orderId', (req, res) => {
+  const { orderId } = req.params;
+  const facturaPath = path.join(__dirname, 'facturas', `factura${orderId}.pdf`);
+
+  if (fs.existsSync(facturaPath)) {
+      res.download(facturaPath, `factura_${orderId}.pdf`, (err) => {
+          if (err) {
+              console.error('Error en la descarga directa de la factura:', err);
+              res.status(500).json({ message: 'Error en la descarga de la factura' });
+          }
+      });
+  } else {
+      res.status(404).json({ message: 'Factura no encontrada' });
+  }
 });
 
 // Iniciar el servidor

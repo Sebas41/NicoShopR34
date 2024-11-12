@@ -70,5 +70,469 @@
     ],
     "total": 18000000,
     "fecha": "2024-11-12T02:20:20.413Z"
+  },
+  {
+    "id": 1731381540079,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731349168977,
+        "nombre": "Computer ASUS",
+        "descripcion": "Portátil Asus E1504ga Nj103 Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
+        "precio": 1565000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731349168960-842954074.png"
+      }
+    ],
+    "total": 1565000,
+    "fecha": "2024-11-12T03:19:00.079Z"
+  },
+  {
+    "id": 1731381648678,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T03:20:48.678Z"
+  },
+  {
+    "id": 1731381908846,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T03:25:08.846Z"
+  },
+  {
+    "id": 1731382224599,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T03:30:24.599Z"
+  },
+  {
+    "id": 1731382393536,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T03:33:13.537Z"
+  },
+  {
+    "id": 1731383399679,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T03:49:59.679Z"
+  },
+  {
+    "id": 1731421272018,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T14:21:12.018Z"
+  },
+  {
+    "id": 1731421793629,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T14:29:53.629Z"
+  },
+  {
+    "id": 1731421827664,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T14:30:27.664Z"
+  },
+  {
+    "id": 1731421988386,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T14:33:08.386Z"
+  },
+  {
+    "id": 1731422179157,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T14:36:19.157Z"
+  },
+  {
+    "id": 1731422794175,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731042093308,
+        "nombre": "Cicla",
+        "descripcion": "Cicla forsuda la uso Cristiano Ronalod, Messi y Neymar",
+        "precio": 3000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731042093306-622556530.jpg"
+      }
+    ],
+    "total": 3000000,
+    "fecha": "2024-11-12T14:46:34.175Z"
+  },
+  {
+    "id": 1731422926821,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731349168977,
+        "nombre": "Computer ASUS",
+        "descripcion": "Portátil Asus E1504ga Nj103 Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
+        "precio": 1565000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731349168960-842954074.png"
+      }
+    ],
+    "total": 1565000,
+    "fecha": "2024-11-12T14:48:46.821Z"
+  },
+  {
+    "id": 1731422974228,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T14:49:34.228Z"
+  },
+  {
+    "id": 1731423215007,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T14:53:35.007Z"
+  },
+  {
+    "id": 1731424353882,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T15:12:33.882Z"
+  },
+  {
+    "id": 1731424509328,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T15:15:09.328Z"
+  },
+  {
+    "id": 1731424773654,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T15:19:33.654Z"
+  },
+  {
+    "id": 1731424973956,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T15:22:53.956Z"
+  },
+  {
+    "id": 1731425140328,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T15:25:40.328Z"
+  },
+  {
+    "id": 1731425219877,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      },
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 45000000,
+    "fecha": "2024-11-12T15:26:59.877Z"
+  },
+  {
+    "id": 1731425448794,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      },
+      {
+        "id": 1731042093308,
+        "nombre": "Cicla",
+        "descripcion": "Cicla forsuda la uso Cristiano Ronalod, Messi y Neymar",
+        "precio": 3000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731042093306-622556530.jpg"
+      }
+    ],
+    "total": 18000000,
+    "fecha": "2024-11-12T15:30:48.794Z"
+  },
+  {
+    "id": 1731425625948,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T15:33:45.948Z"
+  },
+  {
+    "id": 1731425818812,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      },
+      {
+        "id": 1731349168977,
+        "nombre": "Computer ASUS",
+        "descripcion": "Portátil Asus E1504ga Nj103 Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
+        "precio": 1565000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731349168960-842954074.png"
+      }
+    ],
+    "total": 31565000,
+    "fecha": "2024-11-12T15:36:58.812Z"
+  },
+  {
+    "id": 1731425885092,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-12T15:38:05.092Z"
+  },
+  {
+    "id": 1731426650675,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      },
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 45000000,
+    "fecha": "2024-11-12T15:50:50.675Z"
+  },
+  {
+    "id": 1731426952334,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 15000000,
+    "fecha": "2024-11-12T15:55:52.334Z"
   }
 ]

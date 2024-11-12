@@ -8,6 +8,7 @@ const DataBase = require('../controllers/dataBaseController');
 // Instancia del controlador de la base de datos del carrito
 const cartDb = new DataBase('carritos');
 
+
 // Ruta para agregar al carrito
 router.post('/agregar', authenticateToken, addToCart);
 
