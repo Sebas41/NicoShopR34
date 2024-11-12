@@ -371,12 +371,38 @@ loadProductList();
     displayCart();
 
     // Manejar la eliminación de un producto del carrito
-    window.removeFromCart = function(productId) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart = cart.filter(item => item.productoId !== productId);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayCart();
+    window.removeFromCart = async function(productId) {
+        const token = localStorage.getItem('token'); // Obtenemos el token
+    
+        if (!token) {
+            alert('Por favor inicia sesión para eliminar productos del carrito.');
+            return;
+        }
+    
+        try {
+            // Realiza una solicitud DELETE al servidor para eliminar el producto del carrito
+            const response = await fetch(`http://localhost:3000/carrito/eliminar`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ productoId: productId }) // Envía el ID del producto a eliminar
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message || 'Producto eliminado del carrito');
+                displayCart(); // Actualiza la vista del carrito después de eliminar el producto
+            } else {
+                alert(data.message || 'Error al eliminar el producto');
+            }
+        } catch (error) {
+            console.error('Error al eliminar el producto del carrito:', error);
+            alert('Hubo un problema al eliminar el producto del carrito.');
+        }
     };
+    
 
     // Manejar la compra
     const checkoutBtn = document.getElementById('checkoutBtn');
