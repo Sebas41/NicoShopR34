@@ -30,5 +30,45 @@
     ],
     "total": 30000000,
     "fecha": "2024-11-12T00:51:23.669Z"
+  },
+  {
+    "id": 1731377954249,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731349168977,
+        "nombre": "Computer ASUS",
+        "descripcion": "Portátil Asus E1504ga Nj103 Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
+        "precio": 1565000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731349168960-842954074.png"
+      }
+    ],
+    "total": 1565000,
+    "fecha": "2024-11-12T02:19:14.249Z"
+  },
+  {
+    "id": 1731378020413,
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "id": 1731042093308,
+        "nombre": "Cicla",
+        "descripcion": "Cicla forsuda la uso Cristiano Ronalod, Messi y Neymar",
+        "precio": 3000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731042093306-622556530.jpg"
+      },
+      {
+        "id": 1731041699033,
+        "nombre": "moto",
+        "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
+        "precio": 15000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041699029-308475842.jpg"
+      }
+    ],
+    "total": 18000000,
+    "fecha": "2024-11-12T02:20:20.413Z"
   }
 ]

@@ -314,8 +314,9 @@ loadProductList();
             });
     
             const data = await response.json();
+            console.log("Datos del carrito en frontend:", data); // Debugging: Verifica que los datos sean correctos
     
-            if (response.ok && data.productos.length > 0) {
+            if (response.ok && data.productos && data.productos.length > 0) {
                 let total = 0;
                 let cartHTML = `
                     <table class="table table-bordered">
@@ -331,11 +332,12 @@ loadProductList();
                         <tbody>
                 `;
     
-                // Asegúrate de tener una lista de productos en el frontend para obtener los datos del producto
+                // Fetch de productos desde el backend para obtener detalles como el nombre y precio
                 const productos = await fetch('http://localhost:3000/productos').then(res => res.json());
     
+                // Construye la lista de productos en el carrito
                 data.productos.forEach(item => {
-                    const product = productos.find(p => p.id === item.productoId); // Encuentra el producto correspondiente
+                    const product = productos.find(p => p.id === item.productoId); // Encuentra el producto
                     if (product) {
                         const subtotal = product.precio * item.cantidad;
                         total += subtotal;
@@ -367,12 +369,13 @@ loadProductList();
         }
     }
     
+    
 
     displayCart();
 
     // Manejar la eliminación de un producto del carrito
     window.removeFromCart = async function(productId) {
-        const token = localStorage.getItem('token'); // Obtenemos el token
+        const token = localStorage.getItem('token');
     
         if (!token) {
             alert('Por favor inicia sesión para eliminar productos del carrito.');
@@ -380,14 +383,13 @@ loadProductList();
         }
     
         try {
-            // Realiza una solicitud DELETE al servidor para eliminar el producto del carrito
             const response = await fetch(`http://localhost:3000/carrito/eliminar`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ productoId: productId }) // Envía el ID del producto a eliminar
+                body: JSON.stringify({ productoId: productId })
             });
     
             const data = await response.json();
@@ -408,34 +410,45 @@ loadProductList();
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', async () => {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío.');
-                return;
-            }
-
             const token = localStorage.getItem('token');
             if (!token) {
                 alert('Debes iniciar sesión para realizar una compra.');
                 window.location.href = 'login.html';
                 return;
             }
-
+    
             try {
+                // Obtén el carrito del usuario desde el backend
+                const carritoResponse = await fetch('http://localhost:3000/carrito', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+    
+                const carritoData = await carritoResponse.json();
+    
+                // Revisa si el carrito está vacío
+                if (carritoData.productos.length === 0) {
+                    alert('Tu carrito está vacío.');
+                    return;
+                }
+    
+                // Realiza el checkout usando el carrito del backend
                 const response = await fetch('http://localhost:3000/carrito/comprar', {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ items: cart })
+                    body: JSON.stringify({ items: carritoData.productos })
                 });
-
+    
                 const data = await response.json();
                 if (response.ok) {
                     alert(data.message);
-                    localStorage.removeItem('cart');
-                    window.location.href = 'factura.html';
+                    displayCart(); // Refresca el carrito
+                    window.location.href = 'factura.html'; // Redirige a la página de factura
                 } else {
                     alert(data.message);
                 }

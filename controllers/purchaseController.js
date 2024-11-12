@@ -39,14 +39,17 @@ function addToCart(req, res) {
 
 function checkout(req, res) {
   const userId = req.user.id;
-  console.log("User ID en checkout:", userId);
+  console.log("User ID en checkout:", userId); // Verifica el userId autenticado
 
+  // Leer todos los carritos desde el archivo JSON
   const allCarts = cartDb.readData();
-  console.log("Contenido actual de cartDb:", allCarts);
+  console.log("Contenido actual de cartDb:", allCarts); // Verifica el contenido de todos los carritos
 
+  // Encontrar el carrito correspondiente al usuario
   const cart = allCarts.find(c => c.userId === userId);
-  console.log("Intento de checkout - Carrito encontrado:", cart);
+  console.log("Carrito encontrado para el checkout:", cart); // Verifica el carrito del usuario
 
+  // Verificar si el carrito está vacío o no existe
   if (!cart || cart.productos.length === 0) {
       return res.status(400).json({ message: 'Carrito vacío' });
   }
@@ -59,22 +62,27 @@ function checkout(req, res) {
           return res.status(400).json({ message: `Producto ${product ? product.nombre : item.productoId} no disponible o cantidad insuficiente` });
       }
 
+      // Restar la cantidad comprada del inventario
       product.cantidad -= item.cantidad;
       total += product.precio * item.cantidad;
       return { ...product, cantidad: item.cantidad };
   });
 
+  // Actualizar el inventario en `productos.json`
   productDb.writeData(productDb.readData().map(p => {
       const purchasedProduct = orderProducts.find(op => op.id === p.id);
-      return purchasedProduct ? { ...p, cantidad: purchasedProduct.cantidad } : p;
+      return purchasedProduct ? { ...p, cantidad: p.cantidad } : p;
   }));
 
+  // Crear y guardar la orden en `orders.json`
   const order = { id: Date.now(), userId: userId, productos: orderProducts, total, fecha: new Date().toISOString() };
   orderDb.writeData([...orderDb.readData(), order]);
 
+  // Limpia el carrito después de la compra
   cart.productos = [];
-  cartDb.writeData([...cartDb.readData().filter(c => c.userId !== userId), cart]);
+  cartDb.writeData(allCarts.map(c => (c.userId === userId ? cart : c)));
 
+  // Generar factura si está habilitada
   const facturaPath = generarFactura(order, req.user, orderProducts);
   res.status(201).json({ message: 'Compra realizada con éxito', order, factura: facturaPath });
 }
