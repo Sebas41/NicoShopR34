@@ -1,5 +1,15 @@
 # NicoShopR34
 
+## Integrantes
+
+ - Ricardo Andres Chamorro Martinez
+ - Sebastian Erazo Ochoa
+ - Oscar Stiven Muñoz Ramirez
+ - Diego Armando Polanco Lozano
+ - Luis Manuel Rojas Correa
+
+## Descripción del programa
+
 NicoShopR34 es una tienda en línea diseñada para ofrecer una experiencia de compra ágil y eficiente, desarrollada como proyecto final para el curso de Computación en Internet I. Este repositorio contiene el código fuente completo y la documentación necesaria para configurar y ejecutar la aplicación en un entorno de desarrollo local.
 
 ## Tecnologías utilizadas
