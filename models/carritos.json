@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "userId": 1731372653048,
+    "productos": [
+      {
+        "productoId": 1731349168977,
+        "cantidad": 1
+      },
+      {
+        "productoId": 1731041699033,
+        "cantidad": 1
+      }
+    ]
+  }
+]

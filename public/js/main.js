@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="card-body">
                                     <h5 class="card-title">${product.nombre}</h5>
                                     <p class="card-text">${product.descripcion.substring(0, 50)}...</p>
+                                    <p class="text-muted">Disponible: ${product.cantidad}</p> <!-- Muestra la cantidad disponible -->
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="text-primary">$${product.precio.toFixed(2)}</span>
                                         <button class="btn btn-sm btn-outline-secondary" onclick="addToCart(${product.id})">Agregar</button>
@@ -248,6 +249,7 @@ if (addProductForm) {
     }
 
    // Cargar lista completa de productos en shop.html
+// Cargar lista completa de productos en shop.html
 const loadProductList = () => {
     const productListDiv = document.getElementById('productList');
     if (productListDiv) {
@@ -259,16 +261,26 @@ const loadProductList = () => {
                     const productCard = document.createElement('div');
                     productCard.className = 'col-md-4';
 
-                    // Cambia la ruta para que apunte a /uploads/
                     productCard.innerHTML = `
                         <div class="card mb-4 shadow-sm">
                             <img src="${product.imagen || '/uploads/default.jpg'}" class="card-img-top" alt="${product.nombre}">
                             <div class="card-body">
                                 <h5 class="card-title">${product.nombre}</h5>
-                                <p class="card-text">${product.descripcion.substring(0, 100)}</p>
+                                <p class="card-text">${product.descripcion.substring(0, 100)}...</p>
+                                <p class="text-muted">Disponible: ${product.cantidad}</p>
+                                
+                                <!-- Selector de cantidad para que el usuario elija la cantidad -->
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" id="quantity-${product.id}" 
+                                           min="1" max="${product.cantidad}" value="1" aria-label="Cantidad">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" 
+                                                onclick="addToCart(${product.id})">Agregar</button>
+                                    </div>
+                                </div>
+                                
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-primary">$${product.precio}</span>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="addToCart(${product.id})">Agregar</button>
+                                    <span class="text-primary">$${product.precio.toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>
@@ -282,61 +294,79 @@ const loadProductList = () => {
 
 loadProductList();
 
-
-
     // Mostrar los items en el carrito
-    const displayCart = () => {
+    async function displayCart() {
         const cartItemsDiv = document.getElementById('cartItems');
-        if (cartItemsDiv) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                cartItemsDiv.innerHTML = '<p>Tu carrito está vacío.</p>';
-                return;
-            }
-
-            fetch('http://localhost:3000/productos')
-                .then(response => response.json())
-                .then(products => {
-                    let total = 0;
-                    let cartHTML = `
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Subtotal</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                    `;
-                    cart.forEach(item => {
-                        const product = products.find(p => p.id === item.productoId);
-                        if (product) {
-                            const subtotal = product.precio * item.cantidad;
-                            total += subtotal;
-                            cartHTML += `
-                                <tr>
-                                    <td>${product.nombre}</td>
-                                    <td>$${product.precio.toFixed(2)}</td>
-                                    <td>${item.cantidad}</td>
-                                    <td>$${subtotal.toFixed(2)}</td>
-                                    <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${product.id})">Eliminar</button></td>
-                                </tr>
-                            `;
-                        }
-                    });
-                    cartHTML += `
-                            </tbody>
-                        </table>
-                        <h4 class="text-right">Total: $${total.toFixed(2)}</h4>
-                    `;
-                    cartItemsDiv.innerHTML = cartHTML;
-                })
-                .catch(error => console.error('Error al cargar el carrito:', error));
+        if (!cartItemsDiv) return;
+    
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Por favor inicia sesión para ver tu carrito.');
+            return;
         }
-    };
+    
+        try {
+            const response = await fetch('http://localhost:3000/carrito', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok && data.productos.length > 0) {
+                let total = 0;
+                let cartHTML = `
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+    
+                // Asegúrate de tener una lista de productos en el frontend para obtener los datos del producto
+                const productos = await fetch('http://localhost:3000/productos').then(res => res.json());
+    
+                data.productos.forEach(item => {
+                    const product = productos.find(p => p.id === item.productoId); // Encuentra el producto correspondiente
+                    if (product) {
+                        const subtotal = product.precio * item.cantidad;
+                        total += subtotal;
+                        cartHTML += `
+                            <tr>
+                                <td>${product.nombre}</td>
+                                <td>$${product.precio.toFixed(2)}</td>
+                                <td>${item.cantidad}</td>
+                                <td>$${subtotal.toFixed(2)}</td>
+                                <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${product.id})">Eliminar</button></td>
+                            </tr>
+                        `;
+                    }
+                });
+    
+                cartHTML += `
+                        </tbody>
+                    </table>
+                    <h4 class="text-right">Total: $${total.toFixed(2)}</h4>
+                `;
+    
+                cartItemsDiv.innerHTML = cartHTML;
+            } else {
+                cartItemsDiv.innerHTML = '<p>Tu carrito está vacío.</p>';
+            }
+        } catch (error) {
+            console.error('Error al cargar el carrito:', error);
+            alert('Hubo un problema al cargar el carrito.');
+        }
+    }
+    
 
     displayCart();
 
@@ -392,70 +422,71 @@ loadProductList();
 
 
     // Mostrar detalles de la factura en factura.html
-    const displayInvoice = () => {
-        const invoiceDiv = document.getElementById('invoice');
-        if (invoiceDiv) {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('Debes iniciar sesión para ver la factura.');
-                window.location.href = 'login.html';
+    const displayInvoice = async () => {
+        // Obtener el `orderId` de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
+    
+        if (!orderId) {
+            alert('Factura no encontrada');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:3000/orders/${orderId}`, {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+            });
+            const order = await response.json();
+    
+            if (!order || order.error) {
+                alert('Error al cargar la factura.');
                 return;
             }
-
-            fetch('http://localhost:3000/orders', {
-                headers: { 
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(response => response.json())
-                .then(orders => {
-                    if (orders.length === 0) {
-                        invoiceDiv.innerHTML = '<p>No tienes compras realizadas.</p>';
-                        return;
-                    }
-
-                    const lastOrder = orders[orders.length - 1];
-                    let invoiceHTML = `
-                        <p><strong>ID de Compra:</strong> ${lastOrder.id}</p>
-                        <p><strong>Fecha:</strong> ${new Date(lastOrder.fecha).toLocaleString()}</p>
-                        <h4>Productos:</h4>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Unitario</th>
-                                    <th>Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                    `;
-                    lastOrder.productos.forEach(item => {
-                        const subtotal = item.precio * item.cantidad;
-                        invoiceHTML += `
-                            <tr>
-                                <td>${item.nombre}</td>
-                                <td>${item.cantidad}</td>
-                                <td>$${item.precio.toFixed(2)}</td>
-                                <td>$${subtotal.toFixed(2)}</td>
-                            </tr>
-                        `;
-                    });
-                    invoiceHTML += `
-                            </tbody>
-                        </table>
-                        <h4 class="text-right">Total: $${lastOrder.total.toFixed(2)}</h4>
-                    `;
-                    invoiceDiv.innerHTML = invoiceHTML;
-                })
-                .catch(error => console.error('Error al cargar la factura:', error));
+    
+            const invoiceDiv = document.getElementById('invoice');
+            let invoiceHTML = `
+                <p><strong>ID de Compra:</strong> ${order._id}</p>
+                <p><strong>Fecha:</strong> ${new Date(order.fecha).toLocaleString()}</p>
+                <h4>Productos:</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            order.items.forEach(item => {
+                const subtotal = item.precioUnitario * item.cantidad;
+                invoiceHTML += `
+                    <tr>
+                        <td>${item.productoId.nombre}</td>
+                        <td>${item.cantidad}</td>
+                        <td>$${item.precioUnitario.toFixed(2)}</td>
+                        <td>$${subtotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+    
+            invoiceHTML += `
+                    </tbody>
+                </table>
+                <h4 class="text-right">Total: $${order.total.toFixed(2)}</h4>
+            `;
+    
+            invoiceDiv.innerHTML = invoiceHTML;
+        } catch (error) {
+            console.error('Error al cargar la factura:', error);
+            alert('Error al cargar la factura.');
         }
     };
-
-    displayInvoice();
-
-
-
+    
+    // Llama a `displayInvoice` cuando el DOM esté cargado
+    document.addEventListener('DOMContentLoaded', displayInvoice);
     
 
     // Manejar el cierre de sesión
@@ -469,17 +500,42 @@ loadProductList();
     }
 
     // Función para agregar productos al carrito
-    window.addToCart = function(productId) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cart.find(item => item.productoId === productId);
-        if (existingItem) {
-            existingItem.cantidad += 1;
+    window.addToCart = async function(productId) {
+        const quantityInput = document.getElementById(`quantity-${productId}`);
+        const quantity = parseInt(quantityInput.value);
+    
+        if (quantity > 0) {
+            const token = localStorage.getItem('token');  // Asegúrate de tener el token almacenado
+            if (!token) {
+                alert('Por favor inicia sesión para agregar productos al carrito.');
+                return;
+            }
+    
+            try {
+                const response = await fetch('http://localhost:3000/carrito/agregar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`  // Agrega el token en el encabezado de autorización
+                    },
+                    body: JSON.stringify({ productoId: productId, cantidad: quantity }) // Enviar los datos al backend
+                });
+    
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`Producto agregado al carrito (Cantidad: ${quantity}).`);
+                } else {
+                    alert(data.message || 'Error al agregar al carrito');
+                }
+            } catch (error) {
+                console.error('Error al agregar al carrito:', error);
+                alert('Hubo un problema al agregar el producto al carrito.');
+            }
         } else {
-            cart.push({ productoId: productId, cantidad: 1 });
+            alert('Por favor, selecciona una cantidad válida.');
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Producto agregado al carrito.');
     };
+    
 
     // Función para decodificar JWT
     function parseJwt (token) {

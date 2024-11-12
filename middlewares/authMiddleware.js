@@ -20,6 +20,7 @@ function authenticateToken(req, res, next) {
             return res.status(403).json({ message: 'Token inválido' });
         }
         req.user = user; // Agrega la información del usuario al objeto de solicitud
+        console.log("Usuario autenticado:", req.user); // <-- Confirmar que `req.user` tiene el campo `id`
         next();
     });
 }

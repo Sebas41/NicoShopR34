@@ -36,9 +36,12 @@ class DataBase {
    */
   writeData(data) {
     try {
-      fs.writeFileSync(this.filePath, JSON.stringify(data, null, 2));
+        console.log(`Escribiendo datos en ${this.filePath}`);
+        console.log("Datos que se van a escribir:", JSON.stringify(data, null, 2));
+        fs.writeFileSync(this.filePath, JSON.stringify(data, null, 2));
+        console.log(`Datos escritos correctamente en ${this.filePath}`);
     } catch (err) {
-      console.error(`Error escribiendo en el archivo ${this.filePath}:`, err);
+        console.error(`Error escribiendo en el archivo ${this.filePath}:`, err);
     }
   }
 }

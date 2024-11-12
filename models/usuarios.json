@@ -26,5 +26,19 @@
     "password": "9cc0b545c16dc9a10f321a8bcd3aedae88070d3aace31aacd2eaf143d5ad13476e14780c0a8cc4a58ae937a83fe0961e1fa7d593c2aa6c1fc5801bcca4bfd772",
     "salt": "0b45b8bb41df3e7e3695679c66a7605b",
     "role": "cliente"
+  },
+  {
+    "id": 1731371923136,
+    "username": "diego",
+    "password": "b873a97434f867e4be8b5ca40bd5c822d65de484470896971f1c0a3a5757b51e33d2528592dd9a4ca9c02fdaf70a5cb6baa7f5c1e30213abc72c31586b7368f2",
+    "salt": "799814ca8113523dd1e35a31f364146e",
+    "role": "cliente"
+  },
+  {
+    "id": 1731372653048,
+    "username": "sebas",
+    "password": "41f90258d04a03223ef419f03df6936e5b25da6d60d0aeae9aeb07f424d92ac959bc19e244775e555d6912d2f836ba8b9e796c872f04c724880a1b96453659a9",
+    "salt": "1085224bc5f0d8423cb51682bfd924c2",
+    "role": "cliente"
   }
 ]
