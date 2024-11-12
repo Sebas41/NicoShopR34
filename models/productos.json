@@ -26,9 +26,17 @@
   {
     "id": 1731349168977,
     "nombre": "Computer ASUS",
-    "descripcion": "Portátil Asus E1504ga Nj103 Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
+    "descripcion": "Portátil Asus Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
     "precio": 1565000,
     "cantidad": 2,
     "imagen": "/uploads/1731349168960-842954074.png"
+  },
+  {
+    "id": 1731428932339,
+    "nombre": "Computer Hp",
+    "descripcion": "Computador Portátil HP Pavilion 15.6\" 15-EG2519LA Intel Core i5 8GB 512GB Gris",
+    "precio": 2100000,
+    "cantidad": 15,
+    "imagen": "/uploads/1731428932330-645306770.png"
   }
 ]

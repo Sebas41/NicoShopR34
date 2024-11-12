@@ -361,7 +361,7 @@ loadProductList();
     
                 cartItemsDiv.innerHTML = cartHTML;
             } else {
-                cartItemsDiv.innerHTML = '<p>Tu carrito está vacío.</p>';
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
             }
         } catch (error) {
             console.error('Error al cargar el carrito:', error);
