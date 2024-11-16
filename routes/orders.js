@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const PurchaseController = require('../controllers/purchaseController');
 const { authenticateToken } = require('../middlewares/authMiddleware');
-const DataBase = require('../controllers/dataBaseController'); // Asegúrate de importar esta clase correctamente
-
+const DataBase = require('../controllers/dataBaseController');
 const orderDb = new DataBase('orders');
 
 // Obtener todas las órdenes

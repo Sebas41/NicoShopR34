@@ -626,7 +626,7 @@ if (checkoutBtn) {
         const quantity = parseInt(quantityInput.value);
     
         if (quantity > 0) {
-            const token = localStorage.getItem('token');  // Asegúrate de tener el token almacenado
+            const token = localStorage.getItem('token');
             if (!token) {
                 alert('Por favor inicia sesión para agregar productos al carrito.');
                 return;
