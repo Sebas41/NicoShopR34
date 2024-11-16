@@ -50,33 +50,49 @@ function checkout(req, res) {
     }
 
     let total = 0;
+
+    // Cargar la lista de productos y actualizar las cantidades disponibles
+    const products = productDb.readData();
+
     const orderProducts = cart.productos.map(item => {
-        const product = productDb.readData().find(p => p.id === item.productoId);
+        const product = products.find(p => p.id === item.productoId);
         if (!product || product.cantidad < item.cantidad) {
-            return res.status(400).json({ message: `Producto no disponible o cantidad insuficiente` });
+            return res.status(400).json({ message: `Producto ${item.productoId} no disponible o cantidad insuficiente` });
         }
 
+        // Reducir la cantidad disponible del producto
         product.cantidad -= item.cantidad;
+
         total += product.precio * item.cantidad;
+
         return { ...product, cantidad: item.cantidad };
     });
 
-    productDb.writeData(productDb.readData().map(p => {
-        const purchasedProduct = orderProducts.find(op => op.id === p.id);
-        return purchasedProduct ? { ...p, cantidad: p.cantidad } : p;
-    }));
+    // Guardar los cambios en la base de datos de productos
+    productDb.writeData(products);
 
-    const order = { id: Date.now(), userId: userId, productos: orderProducts, total, fecha: new Date().toISOString() };
+    // Crear una nueva orden
+    const order = {
+        id: Date.now(),
+        userId,
+        productos: orderProducts,
+        total,
+        fecha: new Date().toISOString(),
+    };
+
+    // Guardar la orden en la base de datos de órdenes
     orderDb.writeData([...orderDb.readData(), order]);
 
+    // Vaciar el carrito del usuario
     cart.productos = [];
     cartDb.writeData(allCarts.map(c => (c.userId === userId ? cart : c)));
 
+    // Generar factura
     const facturaPath = generarFactura(order, req.user, orderProducts);
 
-    // Enviar primero el status 201 y el mensaje de éxito
     res.status(201).json({ message: 'Compra realizada con éxito', facturaUrl: `/facturas/${path.basename(facturaPath)}` });
 }
+
 
 
 module.exports = { addToCart, checkout };

@@ -550,5 +550,37 @@
     ],
     "total": 30000000,
     "fecha": "2024-11-12T16:33:03.409Z"
+  },
+  {
+    "id": 1731782320999,
+    "userId": 1731597192715,
+    "productos": [
+      {
+        "id": 1731594002968,
+        "nombre": "Copia de warcraft 3: reino del caos",
+        "descripcion": "Tengo tantas copias porque las robé",
+        "precio": 60000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731594002965-356707832.jpg"
+      }
+    ],
+    "total": 60000,
+    "fecha": "2024-11-16T18:38:40.999Z"
+  },
+  {
+    "id": 1731782430091,
+    "userId": 1731597192715,
+    "productos": [
+      {
+        "id": 1731594002968,
+        "nombre": "Copia de warcraft 3: reino del caos",
+        "descripcion": "Tengo tantas copias porque las robé",
+        "precio": 60000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731594002965-356707832.jpg"
+      }
+    ],
+    "total": 60000,
+    "fecha": "2024-11-16T18:40:30.091Z"
   }
 ]

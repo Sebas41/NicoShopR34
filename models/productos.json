@@ -38,5 +38,13 @@
     "precio": 2100000,
     "cantidad": 15,
     "imagen": "/uploads/1731428932330-645306770.png"
+  },
+  {
+    "id": 1731594002968,
+    "nombre": "Copia de warcraft 3: reino del caos",
+    "descripcion": "Tengo tantas copias porque las robé",
+    "precio": 60000,
+    "cantidad": 379,
+    "imagen": "/uploads/1731594002965-356707832.jpg"
   }
 ]
