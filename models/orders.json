@@ -582,5 +582,21 @@
     ],
     "total": 60000,
     "fecha": "2024-11-16T18:40:30.091Z"
+  },
+  {
+    "id": 1731783519577,
+    "userId": 1731597192715,
+    "productos": [
+      {
+        "id": 1731041613394,
+        "nombre": "Carro",
+        "descripcion": "Bonito carro, muy poderoso para trabajar. Si no sabe no opine",
+        "precio": 30000000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731041613390-492247145.jpg"
+      }
+    ],
+    "total": 30000000,
+    "fecha": "2024-11-16T18:58:39.577Z"
   }
 ]

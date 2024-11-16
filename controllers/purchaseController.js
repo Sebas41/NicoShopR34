@@ -11,30 +11,49 @@ function addToCart(req, res) {
   const { productoId, cantidad } = req.body;
   const userId = req.user.id;
 
+
+  if (cantidad <= 0) {
+    return res.status(400).json({ message: 'La cantidad debe ser mayor a cero' });
+  }
+
   // Lee todos los carritos desde el archivo
   let allCarts = cartDb.readData();
 
   // Busca o crea un carrito para el usuario
   let cart = allCarts.find(c => c.userId === userId);
+
+  // Busca el producto
+  const product = productDb.readData().find(p => p.id === productoId);
+
   if (!cart) {
       cart = { userId, productos: [] };
   }
 
-  const product = productDb.readData().find(p => p.id === productoId);
-  if (!product || product.cantidad < cantidad) {
+  if (!product) {
+    return res.status(404).json({ message: 'Producto no encontrado' });
+  } else if (product.cantidad < cantidad) {
       return res.status(400).json({ message: 'Producto no disponible o cantidad insuficiente' });
   }
 
   const cartProduct = cart.productos.find(p => p.productoId === productoId);
+  const totalCantidadEnCarrito = cartProduct ? cartProduct.cantidad + cantidad : cantidad;
+
+  if (totalCantidadEnCarrito > product.cantidad) {
+    return res.status(400).json({ 
+    message: `No puedes agregar más de ${product.cantidad} unidades de este producto al carrito.` 
+  });
+  }
+  // Actualizar la cantidad en el carrito o agregar el producto
   if (cartProduct) {
-      cartProduct.cantidad += cantidad;
+    cartProduct.cantidad += cantidad;
   } else {
-      cart.productos.push({ productoId, cantidad });
+    cart.productos.push({ productoId, cantidad });
   }
 
+  // Actualizar el carrito en la base de datos
   allCarts = allCarts.filter(c => c.userId !== userId);
   allCarts.push(cart);
-  cartDb.writeData(allCarts);  // Asegúrate de que esto escriba correctamente
+  cartDb.writeData(allCarts);
 
   res.status(201).json({ message: 'Producto agregado al carrito', cart });
 }
