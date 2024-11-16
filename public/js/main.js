@@ -37,6 +37,71 @@ function parseJwt (token) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Función para cargar el historial de compras
+    const purchaseHistoryDiv = document.getElementById('purchaseHistory');
+
+    const loadPurchaseHistory = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Por favor, inicia sesión para ver tu historial de compras.');
+            window.location.href = 'login.html';    
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/orders/history', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                purchaseHistoryDiv.innerHTML = `<p class="text-danger">${error.message}</p>`;
+                return;
+            }
+
+            const orders = await response.json();
+
+            // Renderizar el historial
+            if (orders.length > 0) {
+                let historyHTML = `
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Productos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                orders.forEach(order => {
+                    const productList = order.productos.map(p => `<li>${p.nombre} (x${p.cantidad})</li>`).join('');
+                    historyHTML += `
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${new Date(order.fecha).toLocaleString()}</td>
+                            <td>$${order.total.toFixed(2)}</td>
+                            <td><ul>${productList}</ul></td>
+                        </tr>
+                    `;
+                });
+
+                historyHTML += `</tbody></table>`;
+                purchaseHistoryDiv.innerHTML = historyHTML;
+            } else {
+                purchaseHistoryDiv.innerHTML = '<p>No hay compras registradas.</p>';
+            }
+        } catch (error) {
+            console.error('Error al cargar el historial:', error);
+            purchaseHistoryDiv.innerHTML = '<p class="text-danger">Error al cargar el historial de compras.</p>';
+        }
+    };
+
+    // Llamar a la función para cargar el historial
+    loadPurchaseHistory();
+
     // Función para cargar productos destacados en index.html
     const loadFeaturedProducts = () => {
         const featuredProductsDiv = document.getElementById('featuredProducts');
@@ -561,7 +626,7 @@ if (checkoutBtn) {
         const quantity = parseInt(quantityInput.value);
     
         if (quantity > 0) {
-            const token = localStorage.getItem('token');  // Asegúrate de tener el token almacenado
+            const token = localStorage.getItem('token');
             if (!token) {
                 alert('Por favor inicia sesión para agregar productos al carrito.');
                 return;

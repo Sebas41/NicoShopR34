@@ -8,6 +8,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth');
 const productosRoutes = require('./routes/productos');
 const carritoRoutes = require('./routes/carrito'); // Ruta del carrito
+const ordersRoutes = require('./routes/orders');
 
 
 const app = express();
@@ -23,8 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Usar rutas
 app.use('/auth', authRoutes);
 app.use('/productos', productosRoutes);
-app.use('/carrito', carritoRoutes);  // Asegúrate de usar este enrutador
+app.use('/carrito', carritoRoutes);
 app.use('/facturas', express.static(path.join(__dirname, 'facturas')));
+app.use('/orders', ordersRoutes);
 
 
 // Rutas adicionales

@@ -54,5 +54,12 @@
     "password": "f4d926954341a0003586471a20cf57f320ac27560af46c2a182764736ab8496ea35c78281f4c2355dab59cf1f8a4feecf63c2f9e0305b506a90af0a418d58b6a",
     "salt": "354b0dd091cdd2d2f29d7290abe9b9d8",
     "role": "cliente"
+  },
+  {
+    "id": 1731597192715,
+    "username": "DiegoCliente",
+    "password": "54a5c42e25853ee9ef9f2c92320dfb9bb1e69e3eea17ea10581860cb136d54943c93c4dbf413fdc14affc983978ca5ee1d4ba4a7e0a7823d5104d78fdd620cbc",
+    "salt": "871a8e30c59276418012063148c7bb84",
+    "role": "cliente"
   }
 ]
