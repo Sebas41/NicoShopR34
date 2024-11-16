@@ -44,7 +44,15 @@
     "nombre": "Copia de warcraft 3: reino del caos",
     "descripcion": "Tengo tantas copias porque las robé",
     "precio": 60000,
-    "cantidad": 379,
+    "cantidad": 378,
     "imagen": "/uploads/1731594002965-356707832.jpg"
+  },
+  {
+    "id": 1731788892212,
+    "nombre": "Rollo de 500 metros cable utp 6a",
+    "descripcion": "Cable multiproposito, la cantidad justa para la instalación de internet de un hogar chiquito. Ha sido desarrollado para redes de 10 Gigabits. Profe no se si lee esto, saludos, que este bien.",
+    "precio": 1256200,
+    "cantidad": 134,
+    "imagen": "/uploads/1731788892206-715695484.png"
   }
 ]

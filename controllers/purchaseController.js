@@ -112,6 +112,24 @@ function checkout(req, res) {
     res.status(201).json({ message: 'Compra realizada con éxito', facturaUrl: `/facturas/${path.basename(facturaPath)}` });
 }
 
+function getPurchaseHistory(req, res) {
+    const { id: userId, role } = req.user; // Obtén el ID y el rol del usuario autenticado
+    const allOrders = orderDb.readData();
+
+    if (role === 'admin') {
+        // Si es administrador, devolver todas las órdenes
+        return res.status(200).json(allOrders);
+    }
+
+    // Si es cliente, devolver solo sus órdenes
+    const userOrders = allOrders.filter(order => order.userId === userId);
+
+    if (!userOrders || userOrders.length === 0) {
+        return res.status(404).json({ message: 'No tienes compras registradas.' });
+    }
+
+    res.status(200).json(userOrders);
+}
 
 
-module.exports = { addToCart, checkout };
+module.exports = { addToCart, checkout, getPurchaseHistory };
