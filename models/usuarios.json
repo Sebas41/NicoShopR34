@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1731007463332,
+    "username": "admin",
+    "password": "26262437a3964667b222ac9173660d0ddbebb14e8a1b098a5fd5e1107c8ef8da4ff07471ded57dd660d3293ee403f058a4b411d875e2cc91f97e1de19f82fdf7",
+    "salt": "438916d79873d039e768954744f37a56",
+    "role": "admin"
+  },
+  {
+    "id": 1731041480884,
+    "username": "oscar",
+    "password": "52667ac02c60269c0aac21bdebce53a9e0fc9f0eab73cf530dea7727aa47286c866c4593cd6bb1b10d899888402c9fd6f4df99f5a0177c3f5134adcc314edac8",
+    "salt": "5bd43bda412670418ab775cf6c238d78",
+    "role": "cliente"
+  },
+  {
+    "id": 1731278743052,
+    "username": "andres",
+    "password": "0d5393509be0f3e7f884923d66ea3ecf6b694e6990256deb4c95b9388d33787f02f1aceed720dcd8655aaa171d6e64174291fb8c6e29b8106da20d6f18beef96",
+    "salt": "b05ce5ec7429cc8b0739398632f0460e",
+    "role": "cliente"
+  },
+  {
+    "id": 1731346434310,
+    "username": "juan andres",
+    "password": "9cc0b545c16dc9a10f321a8bcd3aedae88070d3aace31aacd2eaf143d5ad13476e14780c0a8cc4a58ae937a83fe0961e1fa7d593c2aa6c1fc5801bcca4bfd772",
+    "salt": "0b45b8bb41df3e7e3695679c66a7605b",
+    "role": "cliente"
+  },
+  {
+    "id": 1731371923136,
+    "username": "diego",
+    "password": "b873a97434f867e4be8b5ca40bd5c822d65de484470896971f1c0a3a5757b51e33d2528592dd9a4ca9c02fdaf70a5cb6baa7f5c1e30213abc72c31586b7368f2",
+    "salt": "799814ca8113523dd1e35a31f364146e",
+    "role": "cliente"
+  },
+  {
+    "id": 1731372653048,
+    "username": "sebas",
+    "password": "41f90258d04a03223ef419f03df6936e5b25da6d60d0aeae9aeb07f424d92ac959bc19e244775e555d6912d2f836ba8b9e796c872f04c724880a1b96453659a9",
+    "salt": "1085224bc5f0d8423cb51682bfd924c2",
+    "role": "cliente"
+  },
+  {
+    "id": 1731425941016,
+    "username": "Erazo98",
+    "password": "60258b5ace940377eb0b0706ac5f66702c500b2385e09d96facd731a9fde2498bc06cc95424f7290612233d4ffb7fa582926c2b6fe079c1280ffc23267e0f626",
+    "salt": "fad0c282128bb9fb55670bafd2103410",
+    "role": "cliente"
+  },
+  {
+    "id": 1731426198776,
+    "username": "oscar22lulu",
+    "password": "f4d926954341a0003586471a20cf57f320ac27560af46c2a182764736ab8496ea35c78281f4c2355dab59cf1f8a4feecf63c2f9e0305b506a90af0a418d58b6a",
+    "salt": "354b0dd091cdd2d2f29d7290abe9b9d8",
+    "role": "cliente"
+  },
+  {
+    "id": 1731597192715,
+    "username": "DiegoCliente",
+    "password": "54a5c42e25853ee9ef9f2c92320dfb9bb1e69e3eea17ea10581860cb136d54943c93c4dbf413fdc14affc983978ca5ee1d4ba4a7e0a7823d5104d78fdd620cbc",
+    "salt": "871a8e30c59276418012063148c7bb84",
+    "role": "cliente"
+  }
+]

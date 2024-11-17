@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito - Tienda En Línea</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <img src="images/LOGONICO.png" alt="" style="width: 100px; height: 57px;" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class=" navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html">Login </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="register.html"> SignUp </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="shop.html">Shop</a>
+                </li>
+
+
+
+                <li class="nav-item d-none" id="logoutNav">
+                  <a class="nav-link" href="#" id="logoutBtn">Cerrar Sesión</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="custom_menu-btn ">
+                <button>
+                  <span class=" s-1">
+                  </span>
+                  <span class="s-2">
+                  </span>
+                  <span class="s-3">
+                  </span>
+                </button>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+    <!-- Carrito de Compras -->
+    <div class="container mt-5">
+        <h2 class="text-center">Your Shopping Cart</h2>
+        <div id="cartItems" class="mt-4">
+            <!-- Los items del carrito se cargarán dinámicamente aquí -->
+        </div>
+        <div class="text-right mt-3">
+          <br> 
+            <button class="btn btn-success" id="checkoutBtn">Make Purchase</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <!-- info section -->
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="info_logo">
+        <h2>
+          NICOSHOP
+        </h2>
+      </div>
+      <div class="row">
+
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h5>
+              About Shop
+            </h5>
+            <div>
+              <div class="img-box-r">
+                <img src="images/location-white.png" width="18px" alt="">
+              </div>
+              <p>
+                Universidad ICESI
+              </p>
+            </div>
+            <div>
+              <div class="img-box-r">
+                <img src="images/telephone-white.png" width="12px" alt="">
+              </div>
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;(602) 5552334
+              </p>
+            </div>
+            <div>
+              <div class="img-box-r">
+                <img src="images/envelope-white.png" width="18px" alt="">
+              </div>
+              <p>
+                nextask2024@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              Informations
+            </h5>
+            <p class="text-justify">
+              Discover products that inspire and improve your life, with quality and affordable prices, in one place.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              ICESI
+            </h5>
+            <p class="text-justify">
+              This is a project of the subject of Internet Computing I, done at ICESI University.
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="info_form ">
+            <h5>
+              NicoShopR34
+            </h5>
+            <p class="text-justify">
+              NicoShopR34 allows all best administrators to manage products and customers to browse the catalog, add products to the cart, make purchases with invoice generation and view their purchase history. The solution is built on a client-server architecture and features secure authentication
+            </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+      <div class="text-center p-3">
+        2024 All Rights Reserved By NicoShopR34s
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,61 +1,55 @@
+// routes/carrito.js
 const express = require('express');
 const router = express.Router();
+const { addToCart, checkout } = require('../controllers/purchaseController');
+const { authenticateToken } = require('../middlewares/authMiddleware');
+const DataBase = require('../controllers/dataBaseController');
 
-// Simulación de base de datos de carritos
-let carritos = [];
+// Instancia del controlador de la base de datos del carrito
+const cartDb = new DataBase('carritos');
 
-// Ruta para agregar un producto al carrito
-router.post('/agregar', (req, res) => {
-  const { userId, productoId, cantidad } = req.body;
 
-  if (!userId || !productoId || !cantidad) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
-  }
+// Ruta para agregar al carrito
+router.post('/agregar', authenticateToken, addToCart);
 
-  // Busca el carrito del usuario o crea uno nuevo
-  let carrito = carritos.find(c => c.userId === userId);
-  if (!carrito) {
-    carrito = { userId, productos: [] };
-    carritos.push(carrito);
-  }
+// Ruta para realizar la compra
+router.post('/comprar', authenticateToken, checkout);
 
-  // Agrega el producto al carrito
-  carrito.productos.push({ productoId, cantidad });
-  res.status(201).json({ message: 'Producto agregado al carrito', carrito });
-});
+// Nueva ruta para obtener el contenido del carrito del usuario
+router.get('/', authenticateToken, (req, res) => {
+    const userId = req.user.id;
+    console.log('User ID:', userId);
+    const carrito = cartDb.readData().find(c => c.userId === userId);
+    console.log('Carrito:', carrito);
 
-// Ruta para ver el carrito
-router.get('/:userId', (req, res) => {
-  const { userId } = req.params;
-  const carrito = carritos.find(c => c.userId === userId);
-
-  if (!carrito) {
-    return res.status(404).json({ message: 'Carrito no encontrado' });
-  }
-
-  res.json(carrito);
-});
-
-router.post('/comprar', (req, res) => {
-    const { userId } = req.body;
-    const carrito = carritos.find(c => c.userId === userId);
-  
-    if (!carrito || carrito.productos.length === 0) {
-      return res.status(400).json({ message: 'El carrito está vacío o no existe' });
+    if (!carrito) {
+        return res.status(200).json({ productos: [] });
     }
-  
-    // Generar la factura (simulada)
-    const factura = {
-      userId,
-      productos: carrito.productos,
-      total: carrito.productos.reduce((sum, p) => sum + (p.cantidad * 100), 0), // Simulación de precios
-      fecha: new Date().toISOString()
-    };
-  
-    // Limpia el carrito
-    carrito.productos = [];
-  
-    res.status(201).json({ message: 'Compra realizada con éxito', factura });
-  });
-  
+
+    res.json(carrito);
+});
+
+router.delete('/eliminar', authenticateToken, (req, res) => {
+    const userId = req.user.id;
+    const { productoId } = req.body; // Asegúrate de que el frontend envíe el productoId en el body
+
+    const carrito = cartDb.readData().find(c => c.userId === userId);
+    if (!carrito) {
+        return res.status(404).json({ message: 'Carrito no encontrado' });
+    }
+
+    // Filtra el producto del carrito
+    carrito.productos = carrito.productos.filter(p => p.productoId !== productoId);
+
+    // Guarda los cambios en el archivo JSON
+    cartDb.writeData([
+        ...cartDb.readData().filter(c => c.userId !== userId),
+        carrito
+    ]);
+
+    res.status(200).json({ message: 'Producto eliminado del carrito' });
+});
+
+
+
 module.exports = router;

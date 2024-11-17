@@ -1,23 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/authMiddleware');
+const ProductosController = require('../controllers/productosController');
+const { authenticateToken, authorizeAdmin } = require('../middlewares/authMiddleware');
+const multer = require('multer');
+const path = require('path');
 
-// Ruta para agregar un nuevo producto (solo para administradores)
-router.post('/agregar', authMiddleware, (req, res) => {
-  const { nombre, descripcion, precio, cantidad } = req.body;
-  
-  // Solo admins pueden agregar productos
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Permiso denegado' });
-  }
-
-  if (!nombre || !descripcion || !precio || !cantidad) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
-  }
-
-  const nuevoProducto = { id: productos.length + 1, nombre, descripcion, precio, cantidad };
-  productos.push(nuevoProducto);
-  res.status(201).json({ message: 'Producto agregado con éxito', producto: nuevoProducto });
+// Configuración de almacenamiento en disco para multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads/'); // Asegúrate de que la carpeta 'public/uploads' exista
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname)); // Guardar con un nombre único
+    }
 });
+
+const upload = multer({ storage: storage });
+
+// Ruta para agregar un producto, utilizando multer para procesar la imagen
+router.post('/agregar', authenticateToken, authorizeAdmin, upload.single('productImage'), (req, res) => {
+    ProductosController.agregarProducto(req, res);
+});
+
+// Ruta para listar productos
+router.get('/', (req, res) => ProductosController.listarProductos(req, res));
 
 module.exports = router;
