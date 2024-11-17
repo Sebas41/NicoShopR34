@@ -12,7 +12,7 @@
     "nombre": "moto",
     "descripcion": "Moto bonita, no le duele nada. moto full para carreras. 0 patos y sapos",
     "precio": 15000000,
-    "cantidad": 1,
+    "cantidad": 0,
     "imagen": "/uploads/1731041699029-308475842.jpg"
   },
   {
@@ -28,7 +28,7 @@
     "nombre": "Computer ASUS",
     "descripcion": "Portátil Asus Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
     "precio": 1565000,
-    "cantidad": 2,
+    "cantidad": 0,
     "imagen": "/uploads/1731349168960-842954074.png"
   },
   {
@@ -52,7 +52,7 @@
     "nombre": "Rollo de 500 metros cable utp 6a",
     "descripcion": "Cable multiproposito, la cantidad justa para la instalación de internet de un hogar chiquito. Ha sido desarrollado para redes de 10 Gigabits. Profe no se si lee esto, saludos, que este bien.",
     "precio": 1256200,
-    "cantidad": 134,
+    "cantidad": 133,
     "imagen": "/uploads/1731788892206-715695484.png"
   }
 ]
