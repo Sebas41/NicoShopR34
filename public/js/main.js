@@ -1,4 +1,5 @@
 // public/js/main.js
+// Main Thread of the program
 
 async function cargarProductos() {
     try {
