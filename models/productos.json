@@ -28,7 +28,7 @@
     "nombre": "Computer ASUS",
     "descripcion": "Portátil Asus Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
     "precio": 1565000,
-    "cantidad": 0,
+    "cantidad": 8,
     "imagen": "/uploads/1731349168960-842954074.png"
   },
   {
@@ -44,7 +44,7 @@
     "nombre": "Copia de warcraft 3: reino del caos",
     "descripcion": "Tengo tantas copias porque las robé",
     "precio": 60000,
-    "cantidad": 378,
+    "cantidad": 377,
     "imagen": "/uploads/1731594002965-356707832.jpg"
   },
   {
@@ -52,7 +52,15 @@
     "nombre": "Rollo de 500 metros cable utp 6a",
     "descripcion": "Cable multiproposito, la cantidad justa para la instalación de internet de un hogar chiquito. Ha sido desarrollado para redes de 10 Gigabits. Profe no se si lee esto, saludos, que este bien.",
     "precio": 1256200,
-    "cantidad": 133,
+    "cantidad": 131,
     "imagen": "/uploads/1731788892206-715695484.png"
+  },
+  {
+    "id": 1732242375300,
+    "nombre": "Paella en polvo caja 500 g magi",
+    "descripcion": "Perfecto para preparar paella. Delicioso condimente, sabroso y aromático. Contiene 500 g. Producto de calidad.",
+    "precio": 40000,
+    "cantidad": 120,
+    "imagen": "/uploads/1732242375291-103933821.jpg"
   }
 ]

@@ -61,5 +61,19 @@
     "password": "54a5c42e25853ee9ef9f2c92320dfb9bb1e69e3eea17ea10581860cb136d54943c93c4dbf413fdc14affc983978ca5ee1d4ba4a7e0a7823d5104d78fdd620cbc",
     "salt": "871a8e30c59276418012063148c7bb84",
     "role": "cliente"
+  },
+  {
+    "id": 1732242122899,
+    "username": "nuevoUsuario8",
+    "password": "1970905f1998f96429171b1fe3eee347c2df2b36e1f01143798168a65a4ac1fd21ee1148cfa15b00c3ec6decfe628bfb63144f806c6b6e389a63d58ebf6a9034",
+    "salt": "a138683c8d128f5af56f2f6d2b0869f5",
+    "role": "cliente"
+  },
+  {
+    "id": 1732242223800,
+    "username": "nuevoUsuario9",
+    "password": "dd5618d68bc4ab15ce99293398cdbcd9cec09a2391348f7c71bcf109f9c12213e0ff3af4716076bedb96b49132748cb4eb3056ba912b7df63eebf6e83062322e",
+    "salt": "75e328d713467d8e37bd7dda3b76e612",
+    "role": "cliente"
   }
 ]

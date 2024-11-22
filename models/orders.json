@@ -670,5 +670,53 @@
     ],
     "total": 4386200,
     "fecha": "2024-11-17T21:42:37.142Z"
+  },
+  {
+    "id": 1732242077375,
+    "userId": 1731597192715,
+    "productos": [
+      {
+        "id": 1731349168977,
+        "nombre": "Computer ASUS",
+        "descripcion": "Portátil Asus Intel Core I3 N305 8Gb Ddr4 512Gb Ssd Pantalla 15,6 pulgadas",
+        "precio": 1565000,
+        "cantidad": 2,
+        "imagen": "/uploads/1731349168960-842954074.png"
+      },
+      {
+        "id": 1731594002968,
+        "nombre": "Copia de warcraft 3: reino del caos",
+        "descripcion": "Tengo tantas copias porque las robé",
+        "precio": 60000,
+        "cantidad": 1,
+        "imagen": "/uploads/1731594002965-356707832.jpg"
+      },
+      {
+        "id": 1731788892212,
+        "nombre": "Rollo de 500 metros cable utp 6a",
+        "descripcion": "Cable multiproposito, la cantidad justa para la instalación de internet de un hogar chiquito. Ha sido desarrollado para redes de 10 Gigabits. Profe no se si lee esto, saludos, que este bien.",
+        "precio": 1256200,
+        "cantidad": 1,
+        "imagen": "/uploads/1731788892206-715695484.png"
+      }
+    ],
+    "total": 4446200,
+    "fecha": "2024-11-22T02:21:17.375Z"
+  },
+  {
+    "id": 1732242258005,
+    "userId": 1732242223800,
+    "productos": [
+      {
+        "id": 1731788892212,
+        "nombre": "Rollo de 500 metros cable utp 6a",
+        "descripcion": "Cable multiproposito, la cantidad justa para la instalación de internet de un hogar chiquito. Ha sido desarrollado para redes de 10 Gigabits. Profe no se si lee esto, saludos, que este bien.",
+        "precio": 1256200,
+        "cantidad": 1,
+        "imagen": "/uploads/1731788892206-715695484.png"
+      }
+    ],
+    "total": 1256200,
+    "fecha": "2024-11-22T02:24:18.005Z"
   }
 ]
