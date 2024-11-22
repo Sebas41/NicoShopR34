@@ -59,6 +59,11 @@ node createAdmin.js
 ### Ejecución del programa
 Inicia el servidor ejecutando:  
 node app.js
+
+Tambien puedes ejecutarlo utilizando:
+
+ `npm run start` ó  `npm start` .
+
 Accede a la aplicación desde tu navegador en `http://localhost:3000`.
 
 ### Detalles adicionales
